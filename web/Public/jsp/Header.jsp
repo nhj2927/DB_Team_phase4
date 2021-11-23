@@ -17,7 +17,7 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 대구광역시 북구 대학로 80, 경북대학교 IT 융복합관</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> KR</a></li>
+                <li><a href="#"><i class="fa fa-won"></i> KR</a></li>
                 <li><a href="#"><i class="fa fa-user-o"></i> 마이페이지</a></li>
             </ul>
         </div>
