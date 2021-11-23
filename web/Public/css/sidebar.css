@@ -53,7 +53,7 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    width: var(--nav--width);
+    width: 30vh;
     height: 100vh;
     background-color: var(--bg-color);
     color: var(--white-color);

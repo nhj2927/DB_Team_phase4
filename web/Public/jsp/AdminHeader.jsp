@@ -9,7 +9,7 @@
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
-    <div id="top-header">
+    <div id="header">
         <div class="container">
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-phone"></i> 080-1111-2222</a></li>
@@ -19,7 +19,6 @@
         </div>
     </div>
     <!-- /TOP HEADER -->
-
     <!-- MAIN HEADER -->
     <div id="header">
         <!-- container -->
@@ -29,7 +28,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="Admin_Main.jsp" class="logo">
                             <img src="./img/logo.png" alt="">
                             <h1>HiAuction</h1>
                         </a>
