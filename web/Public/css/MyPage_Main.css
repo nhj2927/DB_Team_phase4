@@ -1,10 +1,10 @@
 .MyPageBox {
-    width: 70%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
 .MyPageTopBar {
-    height:20%;
+    height:15%;
     display: flex;
 }
 .MyPageTopBar_Logo {
@@ -207,4 +207,21 @@ a{
 }
 .btn {
     font-size: 14px;
+}
+.onSale .buttons {
+    width:210px;
+}
+.onSale .buttons .btn{
+    width:100px;
+}
+
+.onFinish .btn{
+    width:100px;
+}
+
+.onExpired .buttons {
+    width:210px;
+}
+.onExpired .buttons .btn{
+    width:100px;
 }

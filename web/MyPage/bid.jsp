@@ -112,7 +112,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -163,11 +163,11 @@
     </div>
 </div>
 <!-- review Modal -->
-<div class="modal fade" id="reviewMoal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">후기 남기기</h5>
+                <h5 class="modal-title" id="reviewModalLabel">후기 남기기</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
