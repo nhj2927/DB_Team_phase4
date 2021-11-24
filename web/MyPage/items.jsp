@@ -103,7 +103,7 @@
         </div>
         <div class="MyPageBody_content">
           <div class="cardBox">
-            <div class="bid-card card row-flex spb">
+            <div class="bid-card card row-flex spb onSale">
               <div class="bid-left col-flex spb">
                 <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
                 <div class="bid-content row-flex">
@@ -111,7 +111,10 @@
                   <div class="bid-body col-flex">
                     <div class="card-title">Nike air Jordon</div>
                     <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                    <div class="buttons row-flex spb">
+                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,7 +123,7 @@
                 <div class="price">770000원</div>
               </div>
             </div>
-            <div class="bid-card card row-flex spb">
+            <div class="bid-card card row-flex spb onFinish">
               <div class="bid-left col-flex spb">
                 <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
                 <div class="bid-content row-flex">
@@ -128,7 +131,7 @@
                   <div class="bid-body col-flex">
                     <div class="card-title">Nike air Jordon</div>
                     <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>
                   </div>
                 </div>
               </div>
@@ -137,7 +140,7 @@
                 <div class="price">770000원</div>
               </div>
             </div>
-            <div class="bid-card card row-flex spb">
+            <div class="bid-card card row-flex spb onExpired">
               <div class="bid-left col-flex spb">
                 <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
                 <div class="bid-content row-flex">
@@ -145,7 +148,10 @@
                   <div class="bid-body col-flex">
                     <div class="card-title">Nike air Jordon</div>
                     <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewMoal">후기 작성하기</div>
+                    <div class="buttons row-flex spb">
+                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,7 +168,48 @@
   </div>
 
 </div>
+<!-- delete Modal -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="deleteItemModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteItemMoalLabel">상품 삭제하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 삭제하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger">삭제하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- ExpandDate Modal -->
+<div class="modal fade" id="ExpandDateModal" tabindex="-1" aria-labelledby="ExpandDateModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ExpandDateMoalLabel">상품 기간연장하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label>날짜</label>
+          <input type="date" id="expandDate">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">연장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
+<script>
 
+</script>
 </html>

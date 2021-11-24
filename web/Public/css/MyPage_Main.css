@@ -208,3 +208,20 @@ a{
 .btn {
     font-size: 14px;
 }
+.onSale .buttons {
+    width:210px;
+}
+.onSale .buttons .btn{
+    width:100px;
+}
+
+.onFinish .btn{
+    width:100px;
+}
+
+.onExpired .buttons {
+    width:210px;
+}
+.onExpired .buttons .btn{
+    width:100px;
+}
