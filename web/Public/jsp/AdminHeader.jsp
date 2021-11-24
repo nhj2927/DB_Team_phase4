@@ -9,12 +9,12 @@
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
-    <div id="header">
+    <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> 080-1111-2222</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> HiAuction@HiAuction.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 대구광역시 북구 대학로 80, 경북대학교 IT 융복합관</a></li>
+                <li><a href="#" style=" text-decoration-line: none"><i class="fa fa-phone"></i> 080-1111-2222</a></li>
+                <li><a href="#" style=" text-decoration-line: none"><i class="fa fa-envelope-o"></i> HiAuction@HiAuction.com</a></li>
+                <li><a href="#" style=" text-decoration-line: none"><i class="fa fa-map-marker"></i> 대구광역시 북구 대학로 80, 경북대학교 IT 융복합관</a></li>
             </ul>
         </div>
     </div>
