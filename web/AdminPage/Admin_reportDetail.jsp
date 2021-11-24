@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../Public/css/font-awesome.min.css">
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
-    <link type="text/css" rel="stylesheet" href="./style.css"/>
+    <link type="text/css" rel="stylesheet" href="../Public/css/reportDetail.css"/>
     <title>HiAuction - 신고 내용</title>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>

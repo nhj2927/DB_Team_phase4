@@ -55,17 +55,34 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">관리자 추가</h5>
                 </div>
+                <!-- modal body-->
                 <div class="modal-body">
-                    ...
+                    <div class="container">
+                        <div style="padding-top: 20px;">
+                            <form method="post" action="AdminjoinAction.jsp">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="관리자 아이디" name="AdminID" maxlength="20">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="비밀번호" name="AdminPassword" maxlength="20">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="이름" name="AdminName" maxlength="20">
+                                </div>
+                                <input type="submit" class="btn btn-primary form-control" value="회원가입">
+                            </form>
+                        </div>
+                    </div>
                 </div>
+                <!-- modal body-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal for AddAdmin -->
 </body>
 
