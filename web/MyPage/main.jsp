@@ -70,13 +70,13 @@
     <div class="MyPageContent">
         <div class="MyPageSideBar">
             <div class="side-content">
-                <div class="side-title"><a href="#">내 입찰 목록</a></div>
+                <div class="side-title"><a href="bid.jsp">내 입찰 목록</a></div>
                 <div class="side-body"><a href="#">낙찰 완료</a> </div>
                 <div class="side-body"><a href="#">후기 작성 필요</a> </div>
                 <div class="side-body"><a href="#">거래 완료</a> </div>
             </div>
                 <div class="side-content">
-                <div class="side-title"><a href="#">내 등록 상품</a></div>
+                <div class="side-title"><a href="items.jsp">내 등록 상품</a></div>
                 <div class="side-body"><a href="#">낙찰 완료</a> </div>
                 <div class="side-body"><a href="#">후기 작성 필요</a> </div>
                 <div class="side-body"><a href="#">거래 완료</a> </div>
@@ -95,7 +95,7 @@
             <div class="MyPage_RealBody">
                 <div class="MyPageBody_title">
                     <div class="mpb_Title">내 입찰 목록</div>
-                    <a class="more_button" href="#">더보기</a>
+                    <a class="more_button" href="bid.jsp">더보기</a>
                 </div>
                 <div class="MyPageBody_content">
                     <div class="cardBox">
@@ -107,7 +107,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-default btn">후기 작성하기</div>
+                                        <div class="bid-review-button btn-default btn incardBtn">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-default btn">후기 작성하기</div>
+                                        <div class="bid-review-button btn-default btn incardBtn">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                     <div class="bid-body col-flex">
                                         <div class="card-title">Nike air Jordon</div>
                                         <div class="card-address">대구광역시 북구 복현동</div>
-                                        <div class="bid-review-button btn-default btn">후기 작성하기</div>
+                                        <div class="bid-review-button btn-default btn incardBtn">후기 작성하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
             <div class="MyPage_RealBody">
                 <div class="MyPageBody_title">
                     <div class="mpb_Title">내가 등록한 상품 목록</div>
-                    <a class="more_button" href="#">더보기</a>
+                    <a class="more_button" href="items.jsp">더보기</a>
                 </div>
                 <div class="MyPageBody_content">
                     <div class="cardBox">
