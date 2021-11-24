@@ -28,6 +28,12 @@
         <div class="col py-3">
 
         </div>
+        <!-- Buttons -->
+        <div>
+            <button class="btn btn-danger">회원 삭제</button>
+            <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
+        </div>
+        <!-- Buttons -->
     </div>
 </div>
 </body>

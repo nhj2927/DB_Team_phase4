@@ -20,17 +20,9 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#dtBasicExample").on('click', 'tbody > tr.clickable-row', function (e, row, $element) {
-                window.location.href = $(this).data("href");
-            });
-        });
-    </script>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
-    <!--Side Bar-->
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <jsp:include page="../Public/jsp/AdminSidebar.jsp"></jsp:include>
@@ -51,21 +43,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
+                            <tr class="clickable-report-row" style="cursor:pointer;">
                                 <td>1</td>
                                 <td>이거 사기인것 같습니다.</td>
                                 <td>옥션이1</td>
                                 <td>Admin1</td>
                                 <td>2021-11-21</td>
                             </tr>
-                            <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
+                            <tr class="clickable-report-row" style="cursor:pointer;">
                                 <td>2</td>
                                 <td>광고네요 이거.</td>
                                 <td>옥션이2</td>
                                 <td>Admin1</td>
                                 <td>2021-11-21</td>
                             </tr>
-                            <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
+                            <tr class="clickable-report-row" style="cursor:pointer;">
                                 <td>3</td>
                                 <td>이건 좀 아니지 않나요.</td>
                                 <td>옥션이3</td>
@@ -103,27 +95,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr style="cursor:pointer;" onClick="location.href='Admin_memberDetail.jsp'">
-                            <td>1</td>
-                            <td>옥션이1</td>
-                            <td>Auctioneee1</td>
-                            <td>3</td>
-                        </tr>
-                        <tr style="cursor:pointer;" onClick="location.href='Admin_memberDetail.jsp'">
-                            <td>2</td>
-                            <td>나쁜 옥션이2</td>
-                            <td>badAutionee2</td>
-                            <td>11</td>
-                        </tr>
-                        <tr style="cursor:pointer;" onClick="location.href='Admin_memberDetail.jsp'">
-                            <td>3</td>
-                            <td>엄청 나쁜 옥션이3</td>
-                            <td>verybadautione3</td>
-                            <td>21</td>
-                        </tr>
+                            <tr class="clickable-member-row" style="cursor:pointer;">
+                                <td>1</td>
+                                <td>옥션이1</td>
+                                <td>Auctioneee1</td>
+                                <td>3</td>
+                            </tr>
+                            <tr class="clickable-member-row" style="cursor:pointer;">
+                                <td>2</td>
+                                <td>나쁜 옥션이2</td>
+                                <td>badAutionee2</td>
+                                <td>11</td>
+                            </tr>
+                            <tr class="clickable-member-row" style="cursor:pointer;">
+                                <td>3</td>
+                                <td>엄청 나쁜 옥션이3</td>
+                                <td>verybadautione3</td>
+                                <td>21</td>
+                            </tr>
                         </tbody>
                     </table>
-                    <a class="btn btn-outline-dark pull-right" href="Admin_memberManage.jsp">더보기</a>
+                    <a class="btn btn-outline-dark pull-right" href="Admin_memberList.jsp">더보기</a>
                     <br>
                     <div class="text-center">
                         <ul class="reviews-pagination">
@@ -139,7 +131,13 @@
             </div>
         </div>
     </div>
-    <!--Side Bar-->
-
+    <script>
+        $('.clickable-member-row').click(()=>{
+            location.href='Admin_memberDetail.jsp'
+        })
+        $('.clickable-report-row').click(()=>{
+            location.href='Admin_reportDetail.jsp'
+        })
+    </script>
 </body>
 </html>

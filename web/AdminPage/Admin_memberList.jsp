@@ -19,6 +19,7 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <title>HiAuction - 회원관리</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
@@ -39,24 +40,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_MemberDetail.jsp'">
-                        <td>1</td>
-                        <td>옥션이1</td>
-                        <td>Auctioneee1</td>
-                        <td>3</td>
-                    </tr>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_MemberDetail.jsp'">
-                        <td>2</td>
-                        <td>나쁜 옥션이2</td>
-                        <td>badAutionee2</td>
-                        <td>11</td>
-                    </tr>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_MemberDetail.jsp'">
-                        <td>3</td>
-                        <td>엄청 나쁜 옥션이3</td>
-                        <td>verybadautione3</td>
-                        <td>21</td>
-                    </tr>
+                        <tr class="clickable-member-row" style="cursor:pointer;">
+                            <td>1</td>
+                            <td>옥션이1</td>
+                            <td>Auctioneee1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr class="clickable-member-row" style="cursor:pointer;">
+                            <td>2</td>
+                            <td>나쁜 옥션이2</td>
+                            <td>badAutionee2</td>
+                            <td>11</td>
+                        </tr>
+                        <tr class="clickable-member-row" style="cursor:pointer;">
+                            <td>3</td>
+                            <td>엄청 나쁜 옥션이3</td>
+                            <td>verybadautione3</td>
+                            <td>21</td>
+                        </tr>
                     </tbody>
                 </table>
                 <br>
@@ -73,5 +74,13 @@
         </div>
     </div>
 </div>
+<script>
+    $('.clickable-member-row').click(()=>{
+        location.href='Admin_memberDetail.jsp'
+    })
+    $('.clickable-report-row').click(()=>{
+        location.href='Admin_reportDetail.jsp'
+    })
+</script>
 </body>
 </html>

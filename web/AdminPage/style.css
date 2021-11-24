@@ -1,0 +1,27 @@
+.kboard-detail {
+    clear: both;
+    float: left;
+    width: 100%;
+    border-top: 0px solid #545861;
+    border-bottom: 0px solid #e3e3e3;
+    background-color: #f4f4f4;
+    font-size: 18px;
+    padding: 10px;
+}
+.kboard-detail .detail-attr .detail-name {
+    float: left;
+    width: 80px;
+    font-weight: bold;
+    color: #545861;
+    text-align: right;
+    vertical-align: middle;
+}
+.kboard-detail .detail-attr .detail-value {
+    float: left;
+    padding-left: 20px;
+    color: #545861;
+}
+.wrap_content{
+    padding-top: 10vh;
+    padding-bottom: 1vh;
+}
