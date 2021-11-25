@@ -175,6 +175,7 @@
     text-align: center;
     color: white;
     font-weight: bold;
+    align-self: flex-end;
 }
 .bid-alarm-review {
     padding-top: 5px;
