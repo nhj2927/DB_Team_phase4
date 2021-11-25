@@ -58,7 +58,7 @@
                         </thead>
                         <tbody>
                             <%
-                                sql = "select * from report";
+                                sql = "select * from report order by report_id";
                                 pstmt = conn.prepareStatement(sql);
                                 rs = pstmt.executeQuery();
                             %>
@@ -67,7 +67,7 @@
                             <tr class="clickable-report-row" style="cursor:pointer;">
                                 <td><%=rs.getInt(1)%></td>
                                 <td><%=rs.getString(2)%></td>
-                                <td><%=rs.getString(4)%></td>
+                                <td><%=rs.getString(3)%></td>
                                 <td><%=rs.getString(5)%></td>
                                 <td>2021-11-21</td>
                             </tr>

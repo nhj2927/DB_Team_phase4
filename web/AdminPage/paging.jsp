@@ -12,35 +12,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        body{
-            text-align:center;
-        }
-        #paging{
-            font-size: 22pt;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="paging">
-        <!-- 1~10까지 있는 페이지의 페이징 -->
-        <c:url var="action" value="/reportList.do"/>
-        <c:if test="${param.prev}">
-            <a href="${action}?page=${param.beginPage-1}">prev</a>
-        </c:if>
-        <c:forEach begin="${param.beginPage}" end="${param.endPage}" step="1" var="index">
-            <c:choose>
-                <c:when test="${param.page==index}">
-                    ${index}
-                </c:when>
-                <c:otherwise>
-                    <a href="${action}?page=${index}">${index}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:if test="${param.next}">
-            <a href="${action}?page=${param.endPage+1}">next</a>
-        </c:if>
+    <div class="text-center">
+        <ul class="reviews-pagination">
+            <!-- 1~10까지 있는 페이지의 페이징 -->
+            <c:url var="action" value="/reportList.do"/>
+            <c:if test="${param.prev}">
+                <li><a href="${action}?page=${param.beginPage-1}">prev</a></li>
+            </c:if>
+            <c:forEach begin="${param.beginPage}" end="${param.endPage}" step="1" var="index">
+                <c:choose>
+                    <c:when test="${param.page==index}">
+                        ${index}
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${action}?page=${index}">${index}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${param.next}">
+                <li><a href="${action}?page=${param.endPage+1}">next</a></li>
+            </c:if>
+        </ul>
     </div>
 </body>
 </html>

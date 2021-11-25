@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/reportList.do")
+@WebServlet("reportList.do")
 public class ReportListController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         ReportDao dao = ReportDao.getInstance();
@@ -30,7 +30,7 @@ public class ReportListController extends HttpServlet{
         req.setAttribute("paging", paging);
         req.setAttribute("test","test");
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("web/AdminPage/Admin_reportList.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("./AdminPage/Admin_reportList.jsp");
         dispatcher.forward(req, res);
     }
 }

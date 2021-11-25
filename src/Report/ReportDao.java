@@ -25,7 +25,7 @@ public class ReportDao {
         }
     }
     public static ReportDao getInstance(){
-        if(reportDao==null){
+        if(reportDao == null){
             reportDao = new ReportDao();
         }
         return reportDao;

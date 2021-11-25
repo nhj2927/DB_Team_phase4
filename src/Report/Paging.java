@@ -69,9 +69,6 @@ public class Paging {
             next = true;
         }
         prev = (beginPage==1)?false:true;
-        System.out.println("endPage : " + endPage);
-        System.out.println("totalPage : " + totalPage);
-
     }
 
 }
