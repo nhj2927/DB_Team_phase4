@@ -19,6 +19,7 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <title>HiAuction - 신고 리스트</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
@@ -40,27 +41,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
-                        <td>1</td>
-                        <td>이거 사기인것 같습니다.</td>
-                        <td>옥션이1</td>
-                        <td>Admin1</td>
-                        <td>2021-11-21</td>
-                    </tr>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
-                        <td>2</td>
-                        <td>광고네요 이거.</td>
-                        <td>옥션이2</td>
-                        <td>Admin1</td>
-                        <td>2021-11-21</td>
-                    </tr>
-                    <tr style="cursor:pointer;" onClick="location.href='Admin_reportDetail.jsp'">
-                        <td>3</td>
-                        <td>이건 좀 아니지 않나요.</td>
-                        <td>옥션이3</td>
-                        <td>Admin1</td>
-                        <td>2021-11-22</td>
-                    </tr>
+                        <tr class="clickable-report-row" style="cursor:pointer;">
+                            <td>1</td>
+                            <td>이거 사기인것 같습니다.</td>
+                            <td>옥션이1</td>
+                            <td>Admin1</td>
+                            <td>2021-11-21</td>
+                        </tr>
+                        <tr class="clickable-report-row" style="cursor:pointer;">
+                            <td>2</td>
+                            <td>광고네요 이거.</td>
+                            <td>옥션이2</td>
+                            <td>Admin1</td>
+                            <td>2021-11-21</td>
+                        </tr>
+                        <tr class="clickable-report-row" style="cursor:pointer;">
+                            <td>3</td>
+                            <td>이건 좀 아니지 않나요.</td>
+                            <td>옥션이3</td>
+                            <td>Admin1</td>
+                            <td>2021-11-22</td>
+                        </tr>
                     </tbody>
                 </table>
                 <br>
@@ -77,5 +78,13 @@
         </div>
     </div>
 </div>
+<script>
+    $('.clickable-member-row').click(()=>{
+        location.href='Admin_memberDetail.jsp'
+    })
+    $('.clickable-report-row').click(()=>{
+        location.href='Admin_reportDetail.jsp'
+    })
+</script>
 </body>
 </html>

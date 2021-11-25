@@ -1,10 +1,10 @@
 .MyPageBox {
-    width: 70%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
 .MyPageTopBar {
-    height:20%;
+    height:15%;
     display: flex;
 }
 .MyPageTopBar_Logo {
@@ -55,8 +55,7 @@
 .MyPageSideBar {
     flex:1;
     height:100%;
-    background-color: #C4C4C4;
-    opacity:0.5;
+    background-color: rgba(196, 196, 196, 0.3);
 }
 .MyPageBody{
     flex:4;
@@ -149,6 +148,8 @@
     height: 100px;
     background-color: lightgray;
     border-radius: 10px;
+    border-style: hidden;
+    overflow: hidden;
 }
 
 .card-title {
@@ -162,24 +163,65 @@
     opacity: 0.48;
 }
 .bid-review-button {
-    margin-top:20px;
+    margin-top:10px;
     font-weight: bold;
     border-width: 1px;
+    width: 120px;
 }
 .alarm {
     width: 80px;
     height:50px;
-    background-color: #FAAA33;
     border-radius: 10px;
     text-align: center;
-    color: whitesmoke;
+    color: white;
     font-weight: bold;
 }
 .bid-alarm-review {
     padding-top: 5px;
+    background-color: #FAAA33;
+    font-size: 14px;
+}
+.more_bid {
+    width: 100%;
+}
+.item-alarm-onSale{
+    padding-top: 15px;
+    background-color: #3CB2E3;
+}
+.item-alarm-finish{
+    padding-top: 15px;
+    background-color: #C4C4C4;
+}
+.item-alarm-expired{
+    padding-top: 15px;
+    background-color: #D34646;
 }
 
 .price{
     font-size: 16px;
     font-weight: bold;
+    text-align: right;
+}
+a{
+    text-decoration: none;
+}
+.btn {
+    font-size: 14px;
+}
+.onSale .buttons {
+    width:210px;
+}
+.onSale .buttons .btn{
+    width:100px;
+}
+
+.onFinish .btn{
+    width:100px;
+}
+
+.onExpired .buttons {
+    width:210px;
+}
+.onExpired .buttons .btn{
+    width:100px;
 }

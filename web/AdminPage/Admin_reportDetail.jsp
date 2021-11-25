@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../Public/css/font-awesome.min.css">
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="../Public/css/reportDetail.css"/>
     <title>HiAuction - 신고 내용</title>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
@@ -33,25 +34,40 @@
                     <header class="mb-4">
                         <!-- Post title-->
                         <h2 class="fw-bolder mb-1">이건 좀 아닌것 같습니다.</h2>
+                        <hr/>
                         <!-- Post meta content-->
-                        <div class="text-muted mb-2" style="background: #f2f2f2">
-                            <h6>신고자</h6>
+                        <div class="kboard-detail">
+                            <div class="detail-attr">
+                                <div class="detail-name">신고자</div>
+                                <div class="detail-value">옥션이1</div>
+                            </div>
+                            <div class="detail-attr">
+                                <div class="detail-name">담당자</div>
+                                <div class="detail-value">Admin1</div>
+                            </div>
+                            <div class="detail-attr">
+                                <div class="detail-name">작성일</div>
+                                <div class="detail-value">2021-11-22 16:27</div>
+                            </div>
                         </div>
-                        <!-- Post categories-->
+                        <!-- Post meta content-->
                     </header>
                     <!-- Post content-->
-                    <section class="mb-5">
+                    <section class="mb-5 wrap_content">
                         <p class="fs-5 mb-4">
-                             분명히 어제 만나서 거래하기로 했는데 약속장소에 안 나타납니다. 조치 취해주세요.
+                            분명히 어제 만나서 거래하기로 했는데 약속장소에 안 나타납니다. 조치 취해주세요.
                         </p>
-
                     </section>
                 </article>
+                <hr/>
+                <!-- Buttons -->
                 <div>
                     <button class="btn btn-primary">게시글 확인</button>
                     <button class="btn btn-danger">리포트 삭제</button>
                     <button class="btn btn-danger">게시글 삭제</button>
+                    <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
                 </div>
+                <!-- Buttons -->
             </div>
         </div>
     </div>
