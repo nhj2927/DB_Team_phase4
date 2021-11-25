@@ -5,7 +5,18 @@
   Time: 오후 2:15
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+%>
 <html>
 <head>
     <script
@@ -92,7 +103,7 @@
                 <div class="side-body"><a href="#">거래 완료</a> </div>
             </div>
             <div class="side-content">
-                <div class="side-title"><a href="#">회원정보 수정</a></div>
+                <div class="side-title"><a href="modify_User.jsp">회원정보 수정</a></div>
             </div>
         </div>
         <div class="MyPageBody" >
