@@ -12,22 +12,25 @@
 <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>--%>
 </head>
 <body>
+<%
+    String adminID = session.getAttribute("id").toString();
+%>
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <br>
             <!-- admin profile-->
             <div class="dropdown pb-4">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://avatars.dicebear.com/api/identicon/Admin1.svg" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                    <span class="d-none d-sm-inline mx-1"> Admin1</span>
+                    <img src="https://avatars.dicebear.com/api/identicon/<%=adminID%>.svg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                    <span class="d-none d-sm-inline mx-1"><%=adminID%></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="#">Log out</a></li>
+                    <li><a id="Logout"class="dropdown-item">Log out</a></li>
                 </ul>
             </div>
             <!-- admin profile-->
             <br>
-            <a href="Admin_Main.jsp" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <a href="index.jsp" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-5 d-none d-sm-inline">Menu</span>
             </a>
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
@@ -84,5 +87,10 @@
         </div>
     </div>
     <!-- Modal for AddAdmin -->
+    <script>
+        $('#Logout').click(()=>{
+            location.href = "LogoutAction.jsp"
+        })
+    </script>
 </body>
 

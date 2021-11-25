@@ -28,7 +28,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="Admin_Main.jsp" class="logo">
+                        <a href="index.jsp" class="logo">
                             <img src="./img/logo.png" alt="">
                             <h1>HiAuction</h1>
                         </a>

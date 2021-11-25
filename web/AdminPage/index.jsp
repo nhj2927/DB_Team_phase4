@@ -5,6 +5,12 @@
   Time: 오후 3:12
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,6 +28,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
+<%
+    Context context = new InitialContext();
+    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+    Connection conn = dataSource.getConnection();
+    String sql = "";
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+%>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -43,27 +57,21 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <%
+                                sql = "select * from report";
+                                pstmt = conn.prepareStatement(sql);
+                                rs = pstmt.executeQuery();
+                            %>
+
+                            <% while (rs.next()){ %>
                             <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>1</td>
-                                <td>이거 사기인것 같습니다.</td>
-                                <td>옥션이1</td>
-                                <td>Admin1</td>
+                                <td><%=rs.getInt(1)%></td>
+                                <td><%=rs.getString(2)%></td>
+                                <td><%=rs.getString(4)%></td>
+                                <td><%=rs.getString(5)%></td>
                                 <td>2021-11-21</td>
                             </tr>
-                            <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>2</td>
-                                <td>광고네요 이거.</td>
-                                <td>옥션이2</td>
-                                <td>Admin1</td>
-                                <td>2021-11-21</td>
-                            </tr>
-                            <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>3</td>
-                                <td>이건 좀 아니지 않나요.</td>
-                                <td>옥션이3</td>
-                                <td>Admin1</td>
-                                <td>2021-11-22</td>
-                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
                     <a class="btn btn-outline-dark pull-right" href="Admin_reportList.jsp">더보기</a>

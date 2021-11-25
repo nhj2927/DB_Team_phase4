@@ -54,7 +54,7 @@
                     </header>
                     <!-- Post content-->
                     <section class="mb-5 wrap_content">
-                        <p class="fs-5 mb-4">
+                        <p class="fs-6 mb-4">
                             분명히 어제 만나서 거래하기로 했는데 약속장소에 안 나타납니다. 조치 취해주세요.
                         </p>
                     </section>

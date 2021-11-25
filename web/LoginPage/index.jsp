@@ -65,7 +65,7 @@
                 if (type.equals("admin")) {
                     session.setAttribute("id", rs.getString(1));
                     session.setAttribute("name", rs.getString(3));
-                    response.sendRedirect("../AdminPage/index.jsp");
+                    response.sendRedirect("../AdminPage/");
                 } else {
                     session.setAttribute("id", rs.getString(1));
                     session.setAttribute("name", rs.getString(3));
