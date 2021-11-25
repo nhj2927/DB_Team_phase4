@@ -7,12 +7,14 @@
 <%@ page import="javax.naming.Context" %>
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.naming.InitialContext" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("utf-8");
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    ArrayList addressOptions = null;
 %>
 <html>
 <head>
@@ -56,12 +58,12 @@
         }
     }
 
+    Context context = new InitialContext();
+    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+    conn = dataSource.getConnection();
+
     if (id != null) {
         try {
-            Context context = new InitialContext();
-            DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
-            conn = dataSource.getConnection();
-
             String sql = "SELECT COUNT(*) FROM Member"
                     + " WHERE U_id = ?";
             pstmt = conn.prepareStatement(sql);
@@ -119,7 +121,15 @@
             pstmt.close();
             rs.close();
         }
-    } else { %>
+    } else {
+            addressOptions = new ArrayList<String>();
+            pstmt = conn.prepareStatement("SELECT name FROM Address");
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                addressOptions.add(rs.getString(1));
+            }
+            int aaa = 3;
+        %>
         <div class="container-fluid">
             <div class="border form-wrapper">
                 <form class="form-register" action="./" method="post">
@@ -157,25 +167,25 @@
                             <div class="col">
                                 <select class="form-select" name="address" aria-label="Default select example">
                                     <option selected>선택안함</option>
-                                    <option value="동인동">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <% for (Object address: addressOptions){ %>
+                                        <option vale="<%=(String)address%>"><%=(String)address%></option>
+                                   <% } %>
                                 </select>
                             </div>
                             <div class="col">
                                 <select class="form-select" name="address" aria-label="Default select example">
                                     <option selected>선택안함</option>
-                                    <option value="1">One</option>
-                                    <option value="삼덕동">Two</option>
-                                    <option value="3">Three</option>
+                                    <% for (Object address: addressOptions){ %>
+                                    <option vale="<%=(String)address%>"><%=(String)address%></option>
+                                    <% } %>
                                 </select>
                             </div>
                             <div class="col">
                                 <select class="form-select" name="address" aria-label="Default select example">
                                     <option selected>선택안함</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <% for (Object address: addressOptions){ %>
+                                    <option vale="<%=(String)address%>"><%=(String)address%></option>
+                                    <% } %>
                                 </select>
                             </div>
                         </div>
