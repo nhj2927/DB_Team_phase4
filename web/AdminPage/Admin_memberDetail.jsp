@@ -18,23 +18,88 @@
     <link rel="stylesheet" href="../Public/css/font-awesome.min.css">
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="../Public/css/modiUser.css">
     <title>HiAuction - 회원 상세</title>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <jsp:include page="../Public/jsp/AdminSidebar.jsp"></jsp:include>
-        <div class="col py-3">
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <jsp:include page="../Public/jsp/AdminSidebar.jsp"></jsp:include>
+            <div class="col py-3" style="padding: 20vh">
+                <br>
+                <h2 class="fw-bolder mb-1">회원 상세정보</h2>
+                <hr/>
+                <!--modibox-->
+                <div class="modiBox" style="font-size: 20px">
+                    <table class="table table-striped modiUser_table" >
+                        <tr>
+                            <td class="detail-name">아이디</td>
+                            <td>
+                                <span class="inline-message detail-value">KimKim</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail-name">이름</td>
+                            <td>
+                                <span class="inline-message detail-value">홍길동</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="detail-name">이메일</td>
+                            <td>
+                                <span class="inline-message detail-value" >kimkim@gmail.com</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail-name">닉네임</td>
+                            <td>
+                                <span class="inline-message detail-value">경매하자</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail-name">휴대폰 번호</td>
+                            <td>
+                                <span class="inline-message detail-value" style="display: inline-block; width: 200px">01011112222</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="detail-name">거래지역</td>
+
+                            <td>
+                                <span class="detail-value">
+                                    대현동 | 복현동 | 산격동
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail-name">한줄 소개</td>
+                            <td>
+                                <span class="detail-value">
+                                    안녕하세요 처음 가입했는데, 잘 부탁드려요
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="detail-name">신고된 횟수</td>
+                            <td class="detail-value">12</td>
+                        </tr>
+                    </table>
+                </div>
+                <!--modibox-->
+                <hr/>
+                <!-- Buttons -->
+                <div>
+                    <button class="btn btn-danger">회원 삭제</button>
+                    <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
+                </div>
+                <!-- Buttons -->
+            </div>
 
         </div>
-        <!-- Buttons -->
-        <div>
-            <button class="btn btn-danger">회원 삭제</button>
-            <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
-        </div>
-        <!-- Buttons -->
+
     </div>
-</div>
 </body>
 </html>
