@@ -4,8 +4,10 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    request.setCharacterEncoding("utf-8");
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -18,21 +20,16 @@
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="../Public/css/bootstrap.min.css"/>
 
-    <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="../Public/css/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="../Public/css/slick-theme.css"/>
-
-    <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="../Public/css/nouislider.min.css"/>
-
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="../Public/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <link rel="stylesheet" href="./style.css"/>
+
+    <!-- ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 <%
@@ -42,7 +39,6 @@
 
     if (id != null && password != null && type != null) {
         try {
-            System.out.println(type);
             Context context = new InitialContext();
             DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
             conn = dataSource.getConnection();
@@ -73,7 +69,24 @@
                     session.setAttribute("average_score", rs.getDouble(5));
                     session.setAttribute("tel", rs.getString(6));
                     session.setAttribute("email", rs.getString(7));
-                    response.sendRedirect("../MainPage");
+
+                    String u_id = rs.getString(1);
+                    rs.close();
+                    pstmt.close();
+                    sql = "SELECT A.name FROM Address A, Lives_in L"
+                            + " WHERE L.ad_id = A.ad_id"
+                            + " AND L.u_id = ?";
+
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, u_id);
+                    rs = pstmt.executeQuery();
+                    ArrayList addressList = new ArrayList<String>();
+
+                    while (rs.next()){
+                        addressList.add(rs.getString(1));
+                    }
+                    session.setAttribute("address", addressList.toArray(new String[0]));
+                    response.sendRedirect("../");
                 }
             } else { %>
 <script>
