@@ -35,7 +35,7 @@
             </a>
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
                 <li class="nav-item">
-                    <a href="reportList.do" class="nav-link align-middle px-0 text-white">
+                    <a href="reportList" class="nav-link align-middle px-0 text-white">
                         <i class="fas fa-exclamation-circle"></i>
                          <span class="ms-1 d-none d-sm-inline">신고 리스트</span>
                     </a>

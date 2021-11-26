@@ -58,10 +58,6 @@
                         <th>등록일</th>
                     </tr>
                     </thead>
-                    <%
-                        ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("reportList");
-                    %>
-                    <h3> <%=list.get(1).getDescription()%> </h3>
                     <tbody>
 <%--                        <%--%>
 <%--                            sql = "select * from report";--%>
