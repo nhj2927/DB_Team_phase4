@@ -1,6 +1,4 @@
-package vo;
-
-import java.util.*;
+package Vo;
 
 public class Report {
     int reportId;

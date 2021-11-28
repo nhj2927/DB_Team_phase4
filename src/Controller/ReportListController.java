@@ -1,8 +1,8 @@
-package controller;
+package Controller;
 
-import dao.ReportDao;
-import vo.Paging;
-import vo.Report;
+import Dao.ReportDao;
+import Vo.Paging;
+import Vo.Report;
 
 import java.io.IOException;
 import java.util.ArrayList;

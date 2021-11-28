@@ -1,4 +1,4 @@
-package dao;
+package Dao;
 
 import java.sql.*;
 import java.util.*;
@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import vo.Paging;
-import vo.Report;
+import Vo.Paging;
+import Vo.Report;
 
 public class ReportDao {
     private String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
