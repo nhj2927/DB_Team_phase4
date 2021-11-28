@@ -39,8 +39,9 @@ public class ReportDao {
         String sql = "SELECT * FROM ("
                 + "SELECT * FROM ("
                 + "SELECT ROWNUM row_num, report.* FROM report"
-                + ") WHERE row_num >= ?"
+                + " order by report_id desc) WHERE row_num >= ?"
                 + ") WHERE row_num <= ?";
+        //나중에 order by datetime으로 바꾸기
         ArrayList<Report> list = new ArrayList<Report>();
         try{
             conn = DriverManager.getConnection(URL, USER_NAME, USER_PASSWD);

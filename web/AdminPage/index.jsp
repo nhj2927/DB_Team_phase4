@@ -74,7 +74,7 @@
                             <% }%>
                         </tbody>
                     </table>
-                    <a class="btn btn-outline-dark pull-right" href="Admin_reportList.jsp">더보기</a>
+                    <a class="btn btn-outline-dark pull-right" href="reportList">더보기</a>
                     <br>
                     <div class="text-center">
                         <ul class="reviews-pagination">
