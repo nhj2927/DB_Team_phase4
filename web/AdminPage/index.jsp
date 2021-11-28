@@ -5,6 +5,12 @@
   Time: 오후 3:12
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,6 +28,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
+<%
+    Context context = new InitialContext();
+    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+    Connection conn = dataSource.getConnection();
+    String sql = "";
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+%>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -37,33 +51,27 @@
                         <tr>
                             <th>번호</th>
                             <th>제목</th>
-                            <th>신고자</th>
+                            <th>신고자ID</th>
                             <th>담당자</th>
                             <th>등록일</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>1</td>
-                                <td>이거 사기인것 같습니다.</td>
-                                <td>옥션이1</td>
-                                <td>Admin1</td>
+                            <%
+                                sql = "select rownum, report.* from report where rownum <=10 order by report_id desc";
+                                pstmt = conn.prepareStatement(sql);
+                                rs = pstmt.executeQuery();
+                            %>
+
+                            <% while (rs.next()){ %>
+                            <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=rs.getInt(2)%>'">
+                                <td><%=rs.getInt(1)%></td>
+                                <td><%=rs.getString(3)%></td>
+                                <td><%=rs.getString(4)%></td>
+                                <td><%=rs.getString(6)%></td>
                                 <td>2021-11-21</td>
                             </tr>
-                            <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>2</td>
-                                <td>광고네요 이거.</td>
-                                <td>옥션이2</td>
-                                <td>Admin1</td>
-                                <td>2021-11-21</td>
-                            </tr>
-                            <tr class="clickable-report-row" style="cursor:pointer;">
-                                <td>3</td>
-                                <td>이건 좀 아니지 않나요.</td>
-                                <td>옥션이3</td>
-                                <td>Admin1</td>
-                                <td>2021-11-22</td>
-                            </tr>
+                            <% }%>
                         </tbody>
                     </table>
                     <a class="btn btn-outline-dark pull-right" href="Admin_reportList.jsp">더보기</a>
@@ -95,24 +103,34 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class="clickable-member-row" style="cursor:pointer;">
-                                <td>1</td>
-                                <td>옥션이1</td>
-                                <td>Auctioneee1</td>
-                                <td>3</td>
-                            </tr>
-                            <tr class="clickable-member-row" style="cursor:pointer;">
-                                <td>2</td>
-                                <td>나쁜 옥션이2</td>
-                                <td>badAutionee2</td>
-                                <td>11</td>
-                            </tr>
-                            <tr class="clickable-member-row" style="cursor:pointer;">
-                                <td>3</td>
-                                <td>엄청 나쁜 옥션이3</td>
-                                <td>verybadautione3</td>
-                                <td>21</td>
-                            </tr>
+                            <%
+                                sql = "with reported_num as( " +
+                                        "    select m.u_id as ruid, count(*) as rnum " +
+                                        "    from member m, report r " +
+                                        "    where m.u_id=r.u_id " +
+                                        "    group by m.u_id) " +
+                                        "select rownum, m1, m2, r1 " +
+                                        "from(" +
+                                        "select m.name as m1, m.u_id as m2, r.rnum as r1 " +
+                                        "from member m, reported_num r " +
+                                        "where m.u_id=r.ruid " +
+                                        "order by r.rnum desc) " +
+                                        "where rownum <=15 ";
+                                pstmt = conn.prepareStatement(sql);
+                                rs = pstmt.executeQuery();
+                            %>
+                            <% while (rs.next()){ %>
+                                <tr style="cursor:pointer;" onclick="location.href='Admin_memberDetail.jsp?uid=<%=rs.getString(3)%>'">
+                                    <td><%=rs.getInt(1)%></td>
+                                    <td><%=rs.getString(2)%></td>
+                                    <td><%=rs.getString(3)%></td>
+                                    <td><%=rs.getInt(4)%></td>
+                                </tr>
+                            <% }
+                                conn.close();
+                                pstmt.close();
+                                rs.close();
+                            %>
                         </tbody>
                     </table>
                     <a class="btn btn-outline-dark pull-right" href="Admin_memberList.jsp">더보기</a>
@@ -131,13 +149,5 @@
             </div>
         </div>
     </div>
-    <script>
-        $('.clickable-member-row').click(()=>{
-            location.href='Admin_memberDetail.jsp'
-        })
-        $('.clickable-report-row').click(()=>{
-            location.href='Admin_reportDetail.jsp'
-        })
-    </script>
 </body>
 </html>

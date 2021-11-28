@@ -5,6 +5,12 @@
   Time: 오후 8:35
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,6 +28,20 @@
     <title>HiAuction - 신고 내용</title>
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
+<%
+    int report_id = Integer.parseInt(request.getParameter("report_id"));
+    Context context = new InitialContext();
+    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+    Connection conn = dataSource.getConnection();
+    String sql = "select * from report where report_id=?";
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, report_id);
+    rs = pstmt.executeQuery();
+    rs.next();
+%>
 <body>
 <div class="container-fluid">
     <div class="row flex-nowrap">
@@ -33,17 +53,17 @@
                     <!-- Post header-->
                     <header class="mb-4">
                         <!-- Post title-->
-                        <h2 class="fw-bolder mb-1">이건 좀 아닌것 같습니다.</h2>
+                        <h2 class="fw-bolder mb-1"><%=rs.getString(2)%></h2>
                         <hr/>
                         <!-- Post meta content-->
                         <div class="kboard-detail">
                             <div class="detail-attr">
-                                <div class="detail-name">신고자</div>
-                                <div class="detail-value">옥션이1</div>
+                                <div class="detail-name">신고자ID</div>
+                                <div class="detail-value"><%=rs.getString(3)%></div>
                             </div>
                             <div class="detail-attr">
                                 <div class="detail-name">담당자</div>
-                                <div class="detail-value">Admin1</div>
+                                <div class="detail-value"><%=rs.getString(5)%></div>
                             </div>
                             <div class="detail-attr">
                                 <div class="detail-name">작성일</div>
@@ -54,20 +74,27 @@
                     </header>
                     <!-- Post content-->
                     <section class="mb-5 wrap_content">
-                        <p class="fs-5 mb-4">
-                            분명히 어제 만나서 거래하기로 했는데 약속장소에 안 나타납니다. 조치 취해주세요.
+                        <p class="fs-6 mb-4">
+                            <%=rs.getString(2)%>
                         </p>
                     </section>
                 </article>
                 <hr/>
                 <!-- Buttons -->
                 <div>
-                    <button class="btn btn-primary">게시글 확인</button>
-                    <button class="btn btn-danger">리포트 삭제</button>
-                    <button class="btn btn-danger">게시글 삭제</button>
+                    <button class="btn btn-primary" href="#">게시글 확인</button>
+                    <% if(rs.getString(5).equals(session.getAttribute("id").toString())){ %>
+                        <button class="btn btn-danger">리포트 삭제</button>
+                        <button class="btn btn-danger">게시글 삭제</button>
+                    <%}%>
                     <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
                 </div>
                 <!-- Buttons -->
+                <%
+                    rs.close();
+                    pstmt.close();
+                    conn.close();
+                %>
             </div>
         </div>
     </div>

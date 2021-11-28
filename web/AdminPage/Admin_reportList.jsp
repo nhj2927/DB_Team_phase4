@@ -5,7 +5,17 @@
   Time: 오후 8:01
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Report.Report"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <!-- Google font -->
@@ -23,6 +33,14 @@
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
+<%--<%--%>
+<%--    Context context = new InitialContext();--%>
+<%--    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");--%>
+<%--    Connection conn = dataSource.getConnection();--%>
+<%--    String sql = "";--%>
+<%--    PreparedStatement pstmt = null;--%>
+<%--    ResultSet rs = null;--%>
+<%--%>--%>
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <jsp:include page="../Public/jsp/AdminSidebar.jsp"></jsp:include>
@@ -41,37 +59,39 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr class="clickable-report-row" style="cursor:pointer;">
-                            <td>1</td>
-                            <td>이거 사기인것 같습니다.</td>
-                            <td>옥션이1</td>
-                            <td>Admin1</td>
-                            <td>2021-11-21</td>
-                        </tr>
-                        <tr class="clickable-report-row" style="cursor:pointer;">
-                            <td>2</td>
-                            <td>광고네요 이거.</td>
-                            <td>옥션이2</td>
-                            <td>Admin1</td>
-                            <td>2021-11-21</td>
-                        </tr>
-                        <tr class="clickable-report-row" style="cursor:pointer;">
-                            <td>3</td>
-                            <td>이건 좀 아니지 않나요.</td>
-                            <td>옥션이3</td>
-                            <td>Admin1</td>
-                            <td>2021-11-22</td>
-                        </tr>
+<%--                        <%--%>
+<%--                            sql = "select * from report";--%>
+<%--                            pstmt = conn.prepareStatement(sql);--%>
+<%--                            rs = pstmt.executeQuery();--%>
+<%--                        %>--%>
+<%--                        <% while (rs.next()){ %>--%>
+<%--                        <tr class="clickable-report-row" style="cursor:pointer;">--%>
+<%--                            <td><%=rs.getInt(1)%></td>--%>
+<%--                            <td><%=rs.getString(2)%></td>--%>
+<%--                            <td><%=rs.getString(4)%></td>--%>
+<%--                            <td><%=rs.getString(5)%></td>--%>
+<%--                            <td>2021-11-21</td>--%>
+<%--                        </tr>--%>
+<%--                        <% } %>--%>
                     </tbody>
                 </table>
                 <br>
+                <div>
+                    <jsp:include page="paging.jsp">
+                        <jsp:param value="${paging.page}" name="page"/>
+                        <jsp:param value="${paging.beginPage}" name="beginPage"/>
+                        <jsp:param value="${paging.endPage}" name="endPage"/>
+                        <jsp:param value="${paging.prev}" name="prev"/>
+                        <jsp:param value="${paging.next}" name="next"/>
+                    </jsp:include>
+                </div>
                 <div class="text-center">
                     <ul class="reviews-pagination">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+<%--                        <li><a href="#">1</a></li>--%>
+<%--                        <li><a href="#">2</a></li>--%>
+<%--                        <li><a href="#">3</a></li>--%>
+<%--                        <li><a href="#">4</a></li>--%>
+<%--                        <li><a href="#">5</a></li>--%>
                     </ul>
                 </div>
             </div>
