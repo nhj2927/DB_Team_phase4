@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>admin_report_list</servlet-name>
-        <servlet-class>Report.ReportListController</servlet-class>
+        <servlet-class>controller.ReportListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>admin_report_list</servlet-name>
