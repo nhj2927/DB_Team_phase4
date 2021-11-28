@@ -122,7 +122,12 @@
             </option>
             <% } %>
         </select>
-        <div class="category-name"><%=category_name[Integer.valueOf(category_id) - 1]%>
+        <div class="category-name" onclick="registerItem()">
+            <%=category_name[Integer.valueOf(category_id) - 1]%>
+            <span class="item-reg">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                아이템 등록
+            </span>
         </div>
     </div>
     <%
@@ -151,7 +156,7 @@
     <div class="item-wrapper row mt-5">
         <% } %>
         <div class="item card col" onclick="selectItem('<%=rs.getInt(6)%>')">
-            <img src="Public/image/sports.png" class="card-img-top"/>
+            <img src="./Service/downloadImage.jsp?it_id=<%=rs.getInt(6)%>" class="card-img-top"/>
             <div class="card-body align-center">
                 <div class="item-name"><%=rs.getString(1)%>
                 </div>
@@ -163,7 +168,7 @@
                 </div>
             </div>
         </div>
-        <% if (count % 4 == 0) { %>
+        <% if (count % 4 == 3) { %>
     </div>
     <% }
         count++; %>
@@ -203,6 +208,9 @@
         }
         const selectItem = (item_id) => {
             location.href = './DetailPage?item_id=' + item_id;
+        }
+        const registerItem = () => {
+            location.href = './RegisterItemPage';
         }
         $('.address-select').change(() => {
             location.href = './?category_id=' + '<%=category_id%>'

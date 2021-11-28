@@ -62,7 +62,7 @@
 
         String sql = "SELECT I.name, I.start_price, I.current_price,"
                 + " I.quick_price, I.min_bid_unit, I.bid_count,"
-                + " I.expire_date, I.description, M.average_score"
+                + " I.expire_date, I.description, I.it_id, M.average_score"
                 + " FROM Item I, Member M"
                 + " WHERE I.u_id = M.u_id"
                 + " AND I.it_id = ?";
@@ -71,7 +71,7 @@
         rs = pstmt.executeQuery();
         if (rs.next()) { %>
     <div class="item-detail">
-        <img class="item-image" src="../Public/image/sports.png"/>
+        <img class="item-image" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(9)%>"/>
         <div class="item-info">
             <h3><%=rs.getString(1)%>
             </h3>
@@ -109,7 +109,7 @@
                                  width="25rem" height="25rem"/>
                         </span>
                     <div class="col-md-3">
-                        <%=rs.getDouble(9)%>/5
+                        <%=rs.getDouble(10)%>/5
                     </div>
                 </div>
             </div>
@@ -127,8 +127,8 @@
         </div>
     </div>
     <div class="item-description mb-5">
-        <div class="h3 fw-bold mb-3">상세 정보</div>
-        <div class="h5"><%=rs.getString(8)%>
+        <div class="h3 fw-bold mb-3 text-primary">상세 정보</div>
+        <div class="h5" style="line-height: 2"><%=rs.getString(8).replaceAll("\n", "<br>")%>
         </div>
     </div>
     <div class="modal fade" id="bid-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
