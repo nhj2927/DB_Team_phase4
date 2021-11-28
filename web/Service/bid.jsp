@@ -36,17 +36,21 @@
             pstmt.setInt(1, Integer.valueOf(price));
             pstmt.setInt(2, Integer.valueOf(item_id));
             pstmt.executeUpdate();
-            pstmt.close();
             %>
             <script>
                 alert("입찰에 성공하였습니다");
-                location.href = "../DetailPage?item_id=" + '<%=item_id%>';
             </script>
         <% } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            e.printStackTrace(); %>
+            <script>
+                alert("입찰에 실패하였습니다");
+            </script>
+        <% } finally {
             conn.close();
             pstmt.close();
         }
     }
 %>
+<script>
+    location.href = "../DetailPage?item_id=" + '<%=item_id%>';
+</script>
