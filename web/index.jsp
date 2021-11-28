@@ -95,7 +95,10 @@
         rs.close();
     }
 %>
-<jsp:include page="./Public/jsp/Header.jsp"></jsp:include>
+<jsp:include page="./Public/jsp/Header.jsp">
+    <jsp:param name="address" value="<%=address%>"/>
+    <jsp:param name="category_id" value="<%=category_id%>"/>
+</jsp:include>
 <div class="container">
     <div class="category mt-3">
         <% for (int i = 0; i < category_name.length; i++) { %>
@@ -158,9 +161,15 @@
         } catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.close();
-            pstmt.close();
-            rs.close();
+               if (conn != null) {
+                   conn.close();
+               }
+               if (pstmt != null) {
+                   pstmt.close();
+               }
+               if (rs != null) {
+                   rs.close();
+               }
         }
     %>
     <nav class="mt-5 mb-5" aria-label="Page navigation example">

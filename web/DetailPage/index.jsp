@@ -216,9 +216,15 @@
     } catch (Exception e) {
         e.printStackTrace();
     } finally {
-        conn.close();
-        pstmt.close();
-        rs.close();
+        if (conn != null) {
+            conn.close();
+        }
+        if (pstmt != null) {
+            pstmt.close();
+        }
+        if (rs != null) {
+            rs.close();
+        }
     } %>
 </div>
 <% } %>
