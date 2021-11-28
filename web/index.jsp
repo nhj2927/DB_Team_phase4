@@ -57,8 +57,7 @@
     String[] addressList = (String[]) session.getAttribute("address");
     if (addressList == null || addressList.length == 0) { %>
 <script>location.href = "./LoginPage/index.jsp"</script>
-<% } else { %>
-<%
+<% } else {
     address = request.getParameter("address");
     if (address == null) {
         address = addressList[0];
@@ -127,7 +126,9 @@
                         + " WHERE c_id = ?"
                         + " AND ad_id = (SELECT ad_id FROM Address"
                         + " WHERE name = ?)"
-                        + " AND expire_date > sysdate)"
+                        + " AND expire_date > sysdate"
+                        + " AND is_end = 0"
+                        + " ORDER BY expire_date)"
                         + " WHERE rnum BETWEEN ? AND ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, category_id);
