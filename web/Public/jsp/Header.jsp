@@ -166,7 +166,6 @@
         location.href = url;
     }
     const logout = () => {
-        sessionStorage.clear();
         location.href = '/DB_Team_phase4_war_exploded/LoginPage';
     }
 </script>
