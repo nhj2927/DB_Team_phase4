@@ -74,17 +74,8 @@
                             <% }%>
                         </tbody>
                     </table>
-                    <a class="btn btn-outline-dark pull-right" href="Admin_reportList.jsp">더보기</a>
+                    <a class="btn btn-outline-dark pull-right" href="reportList">더보기</a>
                     <br>
-                    <div class="text-center">
-                        <ul class="reviews-pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <!-- 신고 리스트 -->
             </div>
@@ -135,15 +126,6 @@
                     </table>
                     <a class="btn btn-outline-dark pull-right" href="Admin_memberList.jsp">더보기</a>
                     <br>
-                    <div class="text-center">
-                        <ul class="reviews-pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <!-- 회원 관리 -->
             </div>

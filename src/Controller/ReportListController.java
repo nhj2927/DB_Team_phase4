@@ -1,12 +1,14 @@
-package Report;
+package Controller;
+
+import Dao.ReportDao;
+import Vo.Paging;
+import Vo.Report;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +30,6 @@ public class ReportListController extends HttpServlet{
         ArrayList<Report> list = dao.selectAllMember(paging);
         req.setAttribute("reportList", list);
         req.setAttribute("paging", paging);
-        req.setAttribute("test","test");
 
         res.setContentType("text/html; charset=EUC-KR");
         req.setCharacterEncoding("EUC-KR");

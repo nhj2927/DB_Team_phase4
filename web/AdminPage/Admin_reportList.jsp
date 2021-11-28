@@ -12,7 +12,8 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Report.Report"%>
+<%@ page import="Vo.Report"%>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -59,20 +60,22 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                        <%--%>
-<%--                            sql = "select * from report";--%>
-<%--                            pstmt = conn.prepareStatement(sql);--%>
-<%--                            rs = pstmt.executeQuery();--%>
-<%--                        %>--%>
-<%--                        <% while (rs.next()){ %>--%>
-<%--                        <tr class="clickable-report-row" style="cursor:pointer;">--%>
-<%--                            <td><%=rs.getInt(1)%></td>--%>
-<%--                            <td><%=rs.getString(2)%></td>--%>
-<%--                            <td><%=rs.getString(4)%></td>--%>
-<%--                            <td><%=rs.getString(5)%></td>--%>
-<%--                            <td>2021-11-21</td>--%>
-<%--                        </tr>--%>
-<%--                        <% } %>--%>
+                    <%
+                        ArrayList<Report> reports = (ArrayList<Report>) request.getAttribute("reportList");
+                        Iterator<Report> iterator = reports.iterator();
+                        while(iterator.hasNext()){
+                            Report tmp = iterator.next();
+                    %>
+                    <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
+                        <td><%=tmp.getReportId()%></td>
+                        <td><%=tmp.getDescription()%></td>
+                        <td><%=tmp.getUid()%></td>
+                        <td><%=tmp.getAdid()%></td>
+                        <td>2021-11-21</td>
+                    </tr>
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
                 <br>
