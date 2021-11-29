@@ -1,13 +1,21 @@
-package Vo;
+package vo;
 
 public class Report {
     int reportId;
-    String title;
     String description;
     String uid;
     String adid;
     int itid;
     String datetime;
+    String itname;
+
+    public String getItname() {
+        return itname;
+    }
+
+    public void setItname(String itname) {
+        this.itname = itname;
+    }
 
     public int getReportId() {
         return reportId;
@@ -15,14 +23,6 @@ public class Report {
 
     public void setReportId(int reportId) {
         this.reportId = reportId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {

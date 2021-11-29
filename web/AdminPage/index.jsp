@@ -50,15 +50,19 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>번호</th>
-                            <th>제목</th>
+                            <th>신고된 아이템명</th>
                             <th>신고자ID</th>
                             <th>담당자</th>
-                            <th>등록일</th>
+                            <th>작성일</th>
                         </tr>
                         </thead>
                         <tbody>
                             <%
-                                sql = "select rownum, report.* from report where rownum <=10 order by report_id desc";
+                                sql = "with tmp as( " +
+                                        "select rownum as row_num, report.* from report where rownum <=10 order by report_id desc) " +
+                                        "select * " +
+                                        "from tmp left outer join item on tmp.it_id=item.it_id " +
+                                        "order by tmp.row_num";
                                 pstmt = conn.prepareStatement(sql);
                                 rs = pstmt.executeQuery();
                             %>
@@ -66,7 +70,7 @@
                             <% while (rs.next()){ %>
                             <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=rs.getInt(2)%>'">
                                 <td><%=rs.getInt(1)%></td>
-                                <td><%=rs.getString(3)%></td>
+                                <td><%=rs.getString(8)%></td>
                                 <td><%=rs.getString(4)%></td>
                                 <td><%=rs.getString(6)%></td>
                                 <td>2021-11-21</td>
@@ -83,7 +87,7 @@
                 <br>
                 <!-- 회원 관리 -->
                 <div class = "container">
-                    <h2>회원 관리</h2>
+                    <h2>가장 많이 신고된 회원</h2>
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -124,7 +128,7 @@
                             %>
                         </tbody>
                     </table>
-                    <a class="btn btn-outline-dark pull-right" href="Admin_memberList.jsp">더보기</a>
+                    <a class="btn btn-outline-dark pull-right" href="memberList">회원관리 페이지-></a>
                     <br>
                 </div>
                 <!-- 회원 관리 -->

@@ -1,4 +1,4 @@
-package Dao;
+package dao;
 
 import java.sql.*;
 import java.util.*;
@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import Vo.Paging;
-import Vo.Report;
+import vo.Paging;
+import vo.Report;
 
 public class ReportDao {
     private String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -38,11 +38,15 @@ public class ReportDao {
         int startNum = paging.getStartNum();
         int endNum = paging.getEndNum();
 
-        String sql = "SELECT * FROM ("
-                + "SELECT * FROM ("
-                + "SELECT ROWNUM row_num, report.* FROM report"
-                + " order by report_id desc) WHERE row_num >= ?"
-                + ") WHERE row_num <= ?";
+        String sql = "with paged_report as( " +
+                "SELECT * FROM ( " +
+                "SELECT * FROM ( " +
+                "SELECT ROWNUM row_num, report.* FROM report " +
+                "order by report_id desc) WHERE row_num >= ?) " +
+                "WHERE row_num <= ?) " +
+                "select pr.*, i.name " +
+                "from paged_report pr, item i " +
+                "where pr.it_id = i.it_id";
         //나중에 order by datetime으로 바꾸기
         ArrayList<Report> list = new ArrayList<Report>();
         try{
@@ -59,7 +63,7 @@ public class ReportDao {
                 vo.setUid(rs.getString("u_id"));
                 vo.setDescription(rs.getString("description"));
                 //vo.setDatetime(rs.getString("datetime"));
-                //vo.setTitle(rs.getString("title"));
+                vo.setItname(rs.getString("name"));
                 list.add(vo);
             }
             rs.close();
