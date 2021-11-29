@@ -30,6 +30,7 @@ public class ReportListController extends HttpServlet{
         ArrayList<Report> list = dao.selectAllMember(paging);
         req.setAttribute("reportList", list);
         req.setAttribute("paging", paging);
+        req.setAttribute("totalcount", count);
 
         res.setContentType("text/html; charset=EUC-KR");
         req.setCharacterEncoding("EUC-KR");

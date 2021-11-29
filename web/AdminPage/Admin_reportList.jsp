@@ -57,11 +57,17 @@
                         <%
                             ArrayList<Report> reports = (ArrayList<Report>) request.getAttribute("reportList");
                             Iterator<Report> iterator = reports.iterator();
+                            int totalcount = (int)request.getAttribute("totalcount");
+                            int cur_page = 1;
+                            if(request.getParameter("page") != null){
+                                cur_page = Integer.parseInt(request.getParameter("page"));
+                            }
+                            totalcount = totalcount-((cur_page-1)*10);
                             while(iterator.hasNext()){
                                 Report tmp = iterator.next();
                         %>
                         <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
-                            <td><%=tmp.getReportId()%></td>
+                            <td><%=totalcount--%></td>
                             <td><%=tmp.getItname()%></td>
                             <td><%=tmp.getUid()%></td>
                             <td><%=tmp.getAdid()%></td>
