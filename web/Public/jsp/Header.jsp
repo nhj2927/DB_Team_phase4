@@ -36,7 +36,7 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-won"></i> KR</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> 마이페이지</a></li>
+                <li><a href="/DB_Team_phase4_war_exploded/MyPage"><i class="fa fa-user-o"></i> 마이페이지</a></li>
                 <li class="logout" onclick="logout()"><i class="fa fa-user-o"></i>로그아웃</li>
             </ul>
         </div>
