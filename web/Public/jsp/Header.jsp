@@ -172,6 +172,6 @@
         location.href = url;
     }
     const logout = () => {
-        location.href = '/DB_Team_phase4_war_exploded/LoginPage';
+        location.href = '/DB_Team_phase4_war_exploded/Service/LogoutAction.jsp';
     }
 </script>

@@ -28,7 +28,7 @@
 
     //삭제한 회원이 입찰한 아이템의 current price 변경하기
     sql = "with tmp as( " +
-            "    select distinct i.it_id as itid " +
+            "    select distinct i.it_id as itid" +
             "    from item i , bid b " +
             "    where i.it_id = b.it_id " +
             "    and i.is_end=0"+
@@ -37,7 +37,7 @@
             "from tmp, bid b " +
             "where tmp.itid=b.it_id " +
             "and b.u_id is not null " +
-            "group by tmp.itid";
+            "group by tmp.itid, tmp.sp ";
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, memberID);
     ResultSet rs = pstmt.executeQuery();
