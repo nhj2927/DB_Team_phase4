@@ -120,9 +120,6 @@
                                         out.println(rs.getString(1));
                                         out.println("|</span>");
                                     }
-                                    pstmt.close();
-                                    rs.close();
-                                    conn.close();
                                 %>
                             </td>
                         </tr>
@@ -132,14 +129,17 @@
                 <hr/>
                 <!-- Buttons -->
                 <div>
-                    <button class="btn btn-danger">회원 삭제</button>
+                    <button class="btn btn-danger" onclick="location.href='DelMemberAction.jsp?u_id=<%=member_id%>'">회원 삭제</button>
                     <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
                 </div>
                 <!-- Buttons -->
             </div>
-
         </div>
-
+        <%
+            pstmt.close();
+            rs.close();
+            conn.close();
+        %>
     </div>
 </body>
 </html>
