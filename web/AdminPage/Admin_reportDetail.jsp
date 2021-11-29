@@ -33,7 +33,7 @@
     Context context = new InitialContext();
     DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
     Connection conn = dataSource.getConnection();
-    String sql = "select * from report r, item i where r.it_id = i.it_id and r.report_id=?";
+    String sql = "select i.name,r.u_id,r.admin_id,r.create_date,r.description,i.it_id from report r, item i where r.it_id = i.it_id and r.report_id=?";
     PreparedStatement pstmt = null;
     ResultSet rs = null;
 
@@ -54,21 +54,21 @@
                         <header class="mb-4">
                             <!-- Post title-->
                             <h2 class="fw-bolder mb-1">신고 상세 내용</h2>
-                            <h6>아이템명 : <%=rs.getString(7)%></h6>
+                            <h6>아이템명 : <%=rs.getString(1)%></h6>
                             <hr/>
                             <!-- Post meta content-->
                             <div class="kboard-detail">
                                 <div class="detail-attr">
                                     <div class="detail-name">신고자ID</div>
-                                    <div class="detail-value"><%=rs.getString(3)%></div>
+                                    <div class="detail-value"><%=rs.getString(2)%></div>
                                 </div>
                                 <div class="detail-attr">
                                     <div class="detail-name">담당자</div>
-                                    <div class="detail-value"><%=rs.getString(5)%></div>
+                                    <div class="detail-value"><%=rs.getString(3)%></div>
                                 </div>
                                 <div class="detail-attr">
                                     <div class="detail-name">작성일</div>
-                                    <div class="detail-value">2021-11-22 16:27</div>
+                                    <div class="detail-value"><%=rs.getString(4)%></div>
                                 </div>
                             </div>
                             <!-- Post meta content-->
@@ -76,17 +76,17 @@
                         <!-- Post content-->
                         <section class="mb-5 wrap_content">
                             <p class="fs-6 mb-4">
-                                <%=rs.getString(2)%>
+                                <%=rs.getString(5)%>
                             </p>
                         </section>
                     </article>
                     <hr/>
                     <!-- Buttons -->
                     <div>
-                        <button class="btn btn-primary" onclick="location.href='../DetailPage?item_id=<%=rs.getInt(4)%>'">게시글 확인</button>
-                        <% if(rs.getString(5).equals(session.getAttribute("id").toString())){ %>
+                        <button class="btn btn-primary" onclick="location.href='../DetailPage?item_id=<%=rs.getInt(6)%>'">게시글 확인</button>
+                        <% if(rs.getString(3).equals(session.getAttribute("id").toString())){ %>
                             <button id="DelReport" class="btn btn-danger" onclick="location.href='DelReportAction.jsp?report_id=<%=report_id%>'">리포트 삭제</button>
-                            <button id="DelItem"class="btn btn-danger" onclick="location.href='DelItemAction.jsp?it_id=<%=rs.getInt(4)%>'">게시글 삭제</button>
+                            <button id="DelItem"class="btn btn-danger" onclick="location.href='DelItemAction.jsp?it_id=<%=rs.getInt(6)%>'">게시글 삭제</button>
                         <%}%>
                         <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
                     </div>

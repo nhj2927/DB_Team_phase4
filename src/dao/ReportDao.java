@@ -38,15 +38,16 @@ public class ReportDao {
         int startNum = paging.getStartNum();
         int endNum = paging.getEndNum();
 
-        String sql = "with paged_report as( " +
-                "SELECT * FROM ( " +
-                "SELECT * FROM ( " +
-                "SELECT ROWNUM row_num, report.* FROM report " +
-                "order by report_id desc) WHERE row_num >= ?) " +
-                "WHERE row_num <= ?) " +
-                "select pr.*, i.name " +
-                "from paged_report pr, item i " +
-                "where pr.it_id = i.it_id";
+        String sql = "select * from ( " +
+                "select * from ( " +
+                "select rownum as row_num, x.* " +
+                "from( " +
+                "    select report.*, item.name " +
+                "    from report left outer join item on report.it_id=item.it_id " +
+                "    order by report.create_date desc " +
+                ") x " +
+                ")where row_num>=?)  " +
+                "where row_num<=? ";
         //나중에 order by datetime으로 바꾸기
         ArrayList<Report> list = new ArrayList<Report>();
         try{
@@ -62,7 +63,7 @@ public class ReportDao {
                 vo.setItid(rs.getInt("it_id"));
                 vo.setUid(rs.getString("u_id"));
                 vo.setDescription(rs.getString("description"));
-                //vo.setDatetime(rs.getString("datetime"));
+                vo.setDatetime(rs.getString("create_date"));
                 vo.setItname(rs.getString("name"));
                 list.add(vo);
             }

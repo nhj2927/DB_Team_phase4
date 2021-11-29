@@ -71,6 +71,7 @@
             "where tmp.itid=b.it_id " +
             "and b.u_id != ? " +
             "and b.u_id is not null " +
+            "and b.it_id is not null " +
             "group by tmp.itid";
     PreparedStatement pstmt3 = conn.prepareStatement(sql);
     pstmt3.setString(1, memberID);
