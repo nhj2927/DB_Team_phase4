@@ -152,21 +152,9 @@
     <div class="MyPageSideBar">
       <div class="side-content">
         <div class="side-title"><a href="bid.jsp">내 입찰 목록</a></div>
-        <div class="side-body"><a href="#">낙찰 완료</a> </div>
-        <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-        <div class="side-body"><a href="#">거래 완료</a> </div>
       </div>
       <div class="side-content">
         <div class="side-title"><a href="items.jsp">내 등록 상품</a></div>
-        <div class="side-body"><a href="#">낙찰 완료</a> </div>
-        <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-        <div class="side-body"><a href="#">거래 완료</a> </div>
-      </div>
-      <div class="side-content">
-        <div class="side-title"><a href="reviews.jsp">내 후기</a></div>
-        <div class="side-body"><a href="#">낙찰 완료</a> </div>
-        <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-        <div class="side-body"><a href="#">거래 완료</a> </div>
       </div>
       <div class="side-content">
         <div class="side-title"><a href="modify_User.jsp">회원정보 수정</a></div>
@@ -192,7 +180,7 @@
                       "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
                       "        from item it, address ad\n" +
                       "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
-                      "where a.num BETWEEN 1 and 3 \n" +
+//                      "where a.num BETWEEN 1 and 3 \n" +
                       "ORDER BY a.create_date DESC";
               pstmt = conn.prepareStatement(sql);
               pstmt.setString(1, id);
@@ -205,13 +193,13 @@
                         <div class="bid-left col-flex spb">
                           <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
                           <div class="bid-content row-flex">
-                            <img class="card-img" height="100px" width="100px" src="#">
+                            <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
                               <div class="card-title"><%=rs.getString(3)%>></div>
                               <div class="card-address"><%=rs.getString(11)%>></div>
                               <div class="buttons row-flex spb">
-                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
                               </div>
                             </div>
                           </div>
@@ -228,12 +216,23 @@
                         <div class="bid-left col-flex spb">
                           <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
                           <div class="bid-content row-flex">
-                            <img class="card-img" height="100px" width="100px" src="#">
+                            <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
                               <div class="card-title"><%=rs.getString(3)%>></div>
                               <div class="card-address"><%=rs.getString(11)%>></div>
                               <div class="buttons row-flex spb">
-                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ItemModal">구매자 정보보기</div>
+                                <form action="items.jsp" method="post">
+                                  <input type="hidden" class="watchBuyer" name="watchBuyer">
+                                  <input type="hidden" class="item_id_WB" name="item_id_WB" value="<%=rs.getInt(2)%>">
+                                  <input type="submit" id="buyerSubmit" style="display: none">
+                                  <button class="bid-review-button btn-secondary btn" onclick="watchBuyerInfo(this.form)">구매자정보</button>
+
+                                </form>
+                                <div class="bid-review-button btn-secondary btn BuyerModalButton" style="display: none" data-bs-toggle="modal" data-bs-target="#BuyerInfoModal">구매자정보</div>
+                                <form action="complete_item.jsp" method="post">
+                                  <input type="hidden" class="item_id_CB" name="item_id_CB" value="<%=rs.getInt(2)%>">
+                                  <button type="submit" class="bid-review-button btn-secondary btn" >거래완료</button>
+                                </form>
                               </div>
                             </div>
                           </div>
@@ -250,13 +249,13 @@
                       <div class="bid-left col-flex spb">
                         <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
                         <div class="bid-content row-flex">
-                          <img class="card-img" height="100px" width="100px" src="#">
+                          <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                           <div class="bid-body col-flex">
-                            <div class="card-title"><%=rs.getString(3)%>></div>
-                            <div class="card-address"><%=rs.getString(11)%>></div>
+                            <div class="card-title"><%=rs.getString(3)%></div>
+                            <div class="card-address"><%=rs.getString(11)%></div>
                             <div class="buttons row-flex spb">
-                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                              <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                              <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
                             </div>
                           </div>
                         </div>
@@ -273,11 +272,11 @@
                         <div class="bid-left col-flex spb">
                           <div class="bid-GoodFinishDate"><%=rs.getDate(7)%> 낙찰</div>
                           <div class="bid-content row-flex">
-                            <img class="card-img" height="100px" width="100px" src="#">
+                            <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
                               <div class="card-title"><%=rs.getString(3)%>></div>
                               <div class="card-address"><%=rs.getString(11)%>></div>
-                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>
+                              <div class="bid-review-button btn-secondary btn" onclick="location.href='../DetailPage/index.jsp?item_id=<%=rs.getInt(2)%>'">상세보기</div>
                             </div>
                           </div>
                         </div>
@@ -303,67 +302,8 @@
                 }
               }
             %>
-
-<%--            <div class="bid-card card row-flex spb onSale">--%>
-<%--              <div class="bid-left col-flex spb">--%>
-<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                <div class="bid-content row-flex">--%>
-<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                  <div class="bid-body col-flex">--%>
-<%--                    <div class="card-title">Nike air Jordon</div>--%>
-<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                    <div class="buttons row-flex spb">--%>
-<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>--%>
-<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <div class="bid-right col-flex spb">--%>
-<%--                <div class="item-alarm-onSale alarm ">판매중</div>--%>
-<%--                <div class="price">770000원</div>--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="bid-card card row-flex spb onFinish">--%>
-<%--              <div class="bid-left col-flex spb">--%>
-<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                <div class="bid-content row-flex">--%>
-<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                  <div class="bid-body col-flex">--%>
-<%--                    <div class="card-title">Nike air Jordon</div>--%>
-<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <div class="bid-right col-flex spb">--%>
-<%--                <div class="item-alarm-finish alarm ">거래완료</div>--%>
-<%--                <div class="price">770000원</div>--%>
-<%--              </div>--%>
-<%--            </div>--%>
-<%--            <div class="bid-card card row-flex spb onExpired">--%>
-<%--              <div class="bid-left col-flex spb">--%>
-<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                <div class="bid-content row-flex">--%>
-<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                  <div class="bid-body col-flex">--%>
-<%--                    <div class="card-title">Nike air Jordon</div>--%>
-<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                    <div class="buttons row-flex spb">--%>
-<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>--%>
-<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <div class="bid-right col-flex spb">--%>
-<%--                <div class="item-alarm-expired alarm ">기간만료</div>--%>
-<%--                <div class="price">770000원</div>--%>
-<%--              </div>--%>
-<%--            </div>--%>
           </div>
         </div>
-        <div class="more_bid btn btn-primary" style="width: 100%">더보기</div>
       </div>
     </div>
   </div>
@@ -377,13 +317,16 @@
         <h5 class="modal-title" id="deleteItemMoalLabel">상품 삭제하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        정말 삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger">삭제하기</button>
-      </div>
+      <form action="deleteItem.jsp" method="post">
+        <div class="modal-body">
+          정말 삭제하시겠습니까?
+        </div>
+        <input type="hidden" class="it_id" name="it_id">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-danger" onclick="deleteItem(this.form)">삭제하기</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -396,22 +339,138 @@
         <h5 class="modal-title" id="ExpandDateMoalLabel">상품 기간연장하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div>
-          <label>날짜</label>
-          <input type="date" id="expandDate">
+      <form action="expandItem.jsp" method="post">
+        <div class="modal-body">
+          <div>
+            <label>날짜</label>
+            <input type="date" id="expandDate" name = "expandDate">
+          </div>
+          <input type="hidden" class="it_id" name="it_id">
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" onclick="expandItem(this.form)">연장하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- BuyerInfo Modal -->
+<div class="modal fade" id="BuyerInfoModal" tabindex="-1" aria-labelledby="BuyerInfoModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="BuyerInfoModalLabel">구매자 정보</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">연장하기</button>
-      </div>
+      <form action="expandItem.jsp" method="post">
+        <div class="modal-body">
+          <div class = "UserName">
+            <label>이름 : </label><span class="Name" id="BuyerInfoModalName">00000</span>
+          </div>
+          <div class = "UserPhone">
+            <label>전화번호 : </label><span class="Phone" id = "BuyerInfoModalPhone">0000</span>
+          </div>
+          <div class = "UserEmail">
+            <label>Email : </label><span class="Email" id ="BuyerInfoModalEmail">0000</span>
+          </div>
+          <input type="hidden" class="it_id" name="it_id">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 </body>
 <script>
-
+  let Item_id = -1;
+  $('#deleteItemModal').on('show.bs.modal', function (e) {
+    Item_id = $(e.relatedTarget).data('item');
+  });
+  $('#ExpandDateModal').on('show.bs.modal', function (e) {
+    Item_id = $(e.relatedTarget).data('item');
+    alert(Item_id);
+  });
+  function deleteItem(form){
+    $('.it_id').val(Item_id);
+    form.submit();
+  };
+  function expandItem(form){
+    $('.it_id').val(Item_id);
+    form.submit();
+  };
+  function watchBuyerInfo(form) {
+    $('.watchBuyer').val('true');
+    form.submit();
+  };
 </script>
+<%
+  System.out.println(request.getParameter("watchBuyer"));
+  if (request.getParameter("watchBuyer") != null && request.getParameter("watchBuyer").equals("true")) {
+    try {
+      Context context = new InitialContext();
+      DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+      conn = dataSource.getConnection();
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+    sql = "select u_id from bid where it_id=? and ROWNUM = 1 ORDER BY create_date DESC";
+    String buyer_id = null;
+    try {
+      pstmt = conn.prepareStatement(sql);
+      System.out.println(request.getParameter("item_id_WB"));
+      pstmt.setInt(1, Integer.parseInt(request.getParameter("item_id_WB")));
+      rs = pstmt.executeQuery();
+      while(rs.next()){
+        buyer_id = rs.getString(1);
+      }
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+    sql = "SELECT name, tel, email FROM MEMBER WHERE U_id = ?";
+    try{
+      pstmt = conn.prepareStatement(sql);
+      System.out.println(buyer_id);
+      pstmt.setString(1, buyer_id);
+      rs = pstmt.executeQuery();
+      while(rs.next()) {
+%>
+<script>
+  const name = "<%=rs.getString(1)%>";
+  const phone = "<%=rs.getString(2)%>";
+  const email = "<%=rs.getString(3)%>";
+  alert(name, phone, email);
+</script>
+<script>
+  document.getElementById('BuyerInfoModalName').innerHTML = name;
+  document.getElementById('BuyerInfoModalPhone').innerHTML = phone;
+  document.getElementById('BuyerInfoModalEmail').innerHTML = email;</script>
+<script>
+  $('.BuyerModalButton').trigger('click');
+</script>
+<%
+      }
+    } catch (SQLException e)
+    {
+      e.printStackTrace();
+    } finally {
+      if (conn != null) {
+        System.out.println("=======connection 종료===========");
+        conn.close();
+      }
+      if (pstmt != null) {
+        System.out.println("=======prepared statement 종료===========");
+        pstmt.close();
+      }
+      if (rs != null) {
+        System.out.println("=======resultSet 종료===========");
+        rs.close();
+      }
+    }
+  }
+%>
 </html>
 <% } %>

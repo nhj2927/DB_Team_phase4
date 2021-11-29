@@ -74,7 +74,8 @@
                     rs.close();
                 }
             }
-            response.sendRedirect("./");
+            String referer = (String)request.getHeader("REFERER");
+            response.sendRedirect(referer);
         } else if (type.equals("modify")){
 
         }
