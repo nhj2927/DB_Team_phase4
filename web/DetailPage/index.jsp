@@ -46,10 +46,9 @@
 </head>
 <body>
 <%
-    String[] addressList = (String[]) session.getAttribute("address");
     String id = (String) session.getAttribute("id");
     String item_id = request.getParameter("item_id");
-    if (addressList == null || addressList.length == 0) { %>
+    if (id == null) { %>
 <script>location.href = "../LoginPage/index.jsp"</script>
 <% } else if (item_id == null) { %>
 <script>location.href = "../"</script>
