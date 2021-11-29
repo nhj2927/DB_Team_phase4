@@ -40,8 +40,21 @@
     font-weight: 600;
 }
 
+.container .select-wrapper .category-name .item-reg {
+    cursor: pointer;
+    margin-left: 1.2rem;
+    font-size: 1rem;
+    transition: 0.2s;
+    color: #4672C9;
+}
+
+.container .select-wrapper .category-name .item-reg:hover {
+    filter: brightness(0.7);
+}
+
 .container .item-wrapper .item {
     margin: 0 2.5rem;
+    padding: 0.5rem 0.3rem;
     max-width: 17rem;
     cursor: pointer;
 }

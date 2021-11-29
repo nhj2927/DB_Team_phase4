@@ -20,6 +20,7 @@
     String category_id = null;
     String address = null;
     String current_page = null;
+    String search = null;
     Integer total_page = null;
 %>
 <html>
@@ -70,6 +71,7 @@
     if (current_page == null) {
         current_page = "1";
     }
+    search = request.getParameter("search");
 
     try {
         Context context = new InitialContext();
@@ -95,7 +97,10 @@
         rs.close();
     }
 %>
-<jsp:include page="./Public/jsp/Header.jsp"></jsp:include>
+<jsp:include page="./Public/jsp/Header.jsp">
+    <jsp:param name="address" value="<%=address%>"/>
+    <jsp:param name="category_id" value="<%=category_id%>"/>
+</jsp:include>
 <div class="container">
     <div class="category mt-3">
         <% for (int i = 0; i < category_name.length; i++) { %>
@@ -117,19 +122,28 @@
             </option>
             <% } %>
         </select>
-        <div class="category-name"><%=category_name[Integer.valueOf(category_id) - 1]%></div>
+        <div class="category-name" onclick="registerItem()">
+            <%=category_name[Integer.valueOf(category_id) - 1]%>
+            <span class="item-reg">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                아이템 등록
+            </span>
+        </div>
     </div>
     <%
-        try{
+        try {
             String sql = "SELECT * FROM (SELECT name, current_price, quick_price,"
-                        + " bid_count, expire_date, it_id, rownum as rnum FROM Item"
-                        + " WHERE c_id = ?"
-                        + " AND ad_id = (SELECT ad_id FROM Address"
-                        + " WHERE name = ?)"
-                        + " AND expire_date > sysdate"
-                        + " AND is_end = 0"
-                        + " ORDER BY expire_date)"
-                        + " WHERE rnum BETWEEN ? AND ?";
+                    + " bid_count, expire_date, it_id, rownum as rnum FROM Item"
+                    + " WHERE c_id = ?"
+                    + " AND ad_id = (SELECT ad_id FROM Address"
+                    + " WHERE name = ?)"
+                    + " AND expire_date > sysdate"
+                    + " AND is_end = 0"
+                    + " ORDER BY expire_date)"
+                    + " WHERE rnum BETWEEN ? AND ?";
+            if (search != null) {
+                sql += " AND name LIKE '%" + search + "%'";
+            }
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, category_id);
             pstmt.setString(2, address);
@@ -137,37 +151,48 @@
             pstmt.setInt(4, 16 * (Integer.valueOf(current_page)));
             rs = pstmt.executeQuery();
             int count = 0;
-            while(rs.next()){
-                if(count % 4 == 0) { %>
-                <div class="item-wrapper row mt-5">
-                    <% } %>
-                    <div class="item card col" onclick="selectItem('<%=rs.getInt(6)%>')">
-                        <img src="Public/image/sports.png" class="card-img-top"/>
-                        <div class="card-body align-center">
-                            <div class="item-name"><%=rs.getString(1)%></div>
-                            <div class="current-price">현재가: <%=rs.getInt(2)%>원</div>
-                            <div>즉시구매가: <%=rs.getInt(3)%>원</div>
-                            <div>입찰수: <%=rs.getInt(4)%></div>
-                            <div>만료일: <%=rs.getDate(5)%></div>
-                        </div>
-                    </div>
-                <% if(count % 4 == 0) { %>
+            while (rs.next()) {
+                if (count % 4 == 0) { %>
+    <div class="item-wrapper row mt-5">
+        <% } %>
+        <div class="item card col" onclick="selectItem('<%=rs.getInt(6)%>')">
+            <img src="./Service/downloadImage.jsp?it_id=<%=rs.getInt(6)%>" class="card-img-top"/>
+            <div class="card-body align-center">
+                <div class="item-name"><%=rs.getString(1)%>
                 </div>
-                <% } count++; %>
-           <% }
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
+                <div class="current-price">현재가: <%=rs.getInt(2)%>원</div>
+                <div>즉시구매가: <%=rs.getInt(3)%>원</div>
+                <div>입찰수: <%=rs.getInt(4)%>
+                </div>
+                <div>만료일: <%=rs.getDate(5)%>
+                </div>
+            </div>
+        </div>
+        <% if (count % 4 == 3) { %>
+    </div>
+    <% }
+        count++; %>
+    <% }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (conn != null) {
             conn.close();
+        }
+        if (pstmt != null) {
             pstmt.close();
+        }
+        if (rs != null) {
             rs.close();
         }
+    }
     %>
     <nav class="mt-5 mb-5" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <% for(int i = 0; i<total_page; i++){ %>
+            <% for (int i = 0; i < total_page; i++) { %>
             <li class="page-item" onclick="selectPage('<%=i + 1%>')">
-                <a class="page-link"><%=i + 1%></a>
+                <a class="page-link"><%=i + 1%>
+                </a>
             </li>
             <% } %>
         </ul>
@@ -175,7 +200,7 @@
     <script>
         const selectCategory = (category_id, address) => {
             location.href = './?category_id=' + category_id + '&address=' + address
-                            + '&page=' + '<%=current_page%>';
+                + '&page=' + '<%=current_page%>';
         }
         const selectPage = (page) => {
             location.href = './?category_id=' + '<%=category_id%>'
@@ -183,6 +208,9 @@
         }
         const selectItem = (item_id) => {
             location.href = './DetailPage?item_id=' + item_id;
+        }
+        const registerItem = () => {
+            location.href = './RegisterItemPage';
         }
         $('.address-select').change(() => {
             location.href = './?category_id=' + '<%=category_id%>'

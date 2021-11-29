@@ -21,6 +21,10 @@
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     String sql = null;
+    if (session.getAttribute("id") == null){
+        response.sendRedirect("../LoginPage/");
+    }
+
     String type = request.getParameter("type");
     System.out.println(type);
     String email = null;
@@ -150,13 +154,56 @@
         <div class="MyPageTopBar_Logo">
 
         </div>
+        <%
+            try {
+                Context context = new InitialContext();
+                DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+                conn = dataSource.getConnection();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            id = (String) session.getAttribute("id");
+            int bidCount = 0;
+            int itemCount = 0;
+            int ratingCount = 0;
+            sql = "select count(*) from bid where u_id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            try{
+                rs = pstmt.executeQuery();
+                rs.next();
+                bidCount = rs.getInt(1);
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            sql = "select count(*) from item where u_id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            try{
+                rs = pstmt.executeQuery();
+                rs.next();
+                itemCount = rs.getInt(1);
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            sql = "select count(*) from rating where buy_id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            try{
+                rs = pstmt.executeQuery();
+                rs.next();
+                ratingCount = rs.getInt(1);
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        %>
         <div class="MyPageTopBar_info">
             <div class="MyPage_info_comp" >
                 <div class="mpage_comp_head">
                     내 입찰
                 </div>
                 <div class="mpage_comp_content">
-                    7<div class="gun">건</div>
+                    <%=bidCount%><div class="gun">건</div>
                 </div>
 
             </div>
@@ -165,7 +212,7 @@
                     내 등록 상품
                 </div>
                 <div class="mpage_comp_content">
-                    8<div class="gun">건</div>
+                    <%=itemCount%><div class="gun">건</div>
                 </div>
             </div>
             <div class="MyPage_info_comp">
@@ -173,7 +220,7 @@
                     내 후기
                 </div>
                 <div class="mpage_comp_content">
-                    3<div class="gun">건</div>
+                    <%=ratingCount%><div class="gun">건</div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    request.setCharacterEncoding("utf-8");
+    String address = request.getParameter("address");
+    String category_id = request.getParameter("category_id");
+%>
+<style>
+    .search-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .logout {
+        color: #fff;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+</style>
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
@@ -18,7 +36,8 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-won"></i> KR</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> 마이페이지</a></li>
+                <li><a href="/DB_Team_phase4_war_exploded/MyPage"><i class="fa fa-user-o"></i> 마이페이지</a></li>
+                <li class="logout" onclick="logout()"><i class="fa fa-user-o"></i>로그아웃</li>
             </ul>
         </div>
     </div>
@@ -43,14 +62,12 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <form onsubmit="searchItem()" style="display: flex">
                             <select class="input-select">
-                                <option value="0">모든 카테고리</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                                <option value="0">검색</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input id="search-input" class="input" placeholder="Search here">
+                            <div class="search-btn" onclick="searchItem()">검색</div>
                         </form>
                     </div>
                 </div>
@@ -106,7 +123,7 @@
                                 </div>
                                 <div class="cart-btns">
                                     <a href="#">View Cart</a>
-                                    <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -131,3 +148,24 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
+<script>
+    const searchItem = () => {
+        const address = '<%=address%>';
+        const category_id = '<%=category_id%>';
+        const search = $('#search-input').val();
+        let url = '/DB_Team_phase4_war_exploded/?';
+        if (search) {
+            url += 'search=' + search;
+        }
+        if (address !== 'null') {
+            url += '&address=' + address;
+        }
+        if (category_id !== 'null') {
+            url += '&category_id=' + category_id;
+        }
+        location.href = url;
+    }
+    const logout = () => {
+        location.href = '/DB_Team_phase4_war_exploded/LoginPage';
+    }
+</script>

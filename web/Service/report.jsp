@@ -53,8 +53,15 @@
                 alert("신고 실패하였습니다");
             </script>
         <% } finally {
-            conn.close();
-            pstmt.close();
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
         }
     }
 %>

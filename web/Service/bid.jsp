@@ -46,8 +46,12 @@
                 alert("입찰에 실패하였습니다");
             </script>
         <% } finally {
-            conn.close();
-            pstmt.close();
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
         }
     }
 %>
