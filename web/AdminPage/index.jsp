@@ -51,7 +51,7 @@
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th>번호</th>
+                            <th>리포트ID</th>
                             <th>신고된 아이템명</th>
                             <th>신고자ID</th>
                             <th>담당자</th>
