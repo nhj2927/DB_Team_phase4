@@ -142,7 +142,7 @@
                     + " ORDER BY create_date DESC)"
                     + " WHERE rnum BETWEEN ? AND ?";
             if (search != null) {
-                sql += " AND name LIKE '%" + search + "%'";
+                sql += " AND LOWER(name) LIKE '%" + search + "%'";
             }
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, category_id);

@@ -155,7 +155,7 @@
         const search = $('#search-input').val();
         let url = '/DB_Team_phase4_war_exploded/?';
         if (search) {
-            url += 'search=' + search;
+            url += 'search=' + search.toLowerCase();
         }
         if (address !== 'null') {
             url += '&address=' + address;
