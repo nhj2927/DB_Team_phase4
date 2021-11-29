@@ -1,4 +1,6 @@
-<%--
+<%@ page import="vo.Member" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %><%--
   Created by IntelliJ IDEA.
   User: jacob
   Date: 2021-11-23
@@ -30,45 +32,53 @@
             <br>
             <div class = "container">
                 <h2>회원 관리</h2>
+                <h6>총 회원수 : <%=request.getAttribute("totalcount")%></h6>
                 <table class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
                         <th>번호</th>
                         <th>이름</th>
                         <th>ID</th>
+                        <th>EMAIL</th>
+                        <th>평균 점수</th>
                         <th>신고된 횟수</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr class="clickable-member-row" style="cursor:pointer;">
-                            <td>1</td>
-                            <td>옥션이1</td>
-                            <td>Auctioneee1</td>
-                            <td>3</td>
+                        <%
+                            ArrayList<Member> reports = (ArrayList<Member>) request.getAttribute("reportList");
+                            Iterator<Member> iterator = reports.iterator();
+                            int totalcount = (int)request.getAttribute("totalcount");
+                            int cur_page = 1;
+                            if(request.getParameter("page") != null){
+                                cur_page = Integer.parseInt(request.getParameter("page"));
+                            }
+                            totalcount = totalcount-((cur_page-1)*10);
+                            while(iterator.hasNext()){
+                                Member tmp = iterator.next();
+                        %>
+                        <tr style="cursor:pointer;" onclick="location.href='Admin_memberDetail.jsp?uid=<%=tmp.getU_id()%>'">
+                            <td><%=totalcount--%></td>
+                            <td><%=tmp.getName()%></td>
+                            <td><%=tmp.getU_id()%></td>
+                            <td><%=tmp.getEmail()%></td>
+                            <td><%=tmp.getAverage_score()%></td>
+                            <td><%=tmp.getReported_num()%></td>
                         </tr>
-                        <tr class="clickable-member-row" style="cursor:pointer;">
-                            <td>2</td>
-                            <td>나쁜 옥션이2</td>
-                            <td>badAutionee2</td>
-                            <td>11</td>
-                        </tr>
-                        <tr class="clickable-member-row" style="cursor:pointer;">
-                            <td>3</td>
-                            <td>엄청 나쁜 옥션이3</td>
-                            <td>verybadautione3</td>
-                            <td>21</td>
-                        </tr>
+                        <%
+                            }
+                        %>
                     </tbody>
                 </table>
                 <br>
-                <div class="text-center">
-                    <ul class="reviews-pagination">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                    </ul>
+                <div>
+                    <jsp:include page="memberlist_paging.jsp">
+                        <jsp:param value="${paging.page}" name="page"/>
+                        <jsp:param value="${paging.beginPage}" name="beginPage"/>
+                        <jsp:param value="${paging.endPage}" name="endPage"/>
+                        <jsp:param value="${paging.prev}" name="prev"/>
+                        <jsp:param value="${paging.next}" name="next"/>
+                    </jsp:include>
                 </div>
             </div>
         </div>

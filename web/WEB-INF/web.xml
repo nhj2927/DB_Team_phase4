@@ -5,10 +5,19 @@
          version="4.0">
     <servlet>
         <servlet-name>admin_report_list</servlet-name>
-        <servlet-class>Controller.ReportListController</servlet-class>
+        <servlet-class>controller.ReportListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>admin_report_list</servlet-name>
         <url-pattern>/AdminPage/reportList</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>admin_member_list</servlet-name>
+        <servlet-class>controller.MemberListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_member_list</servlet-name>
+        <url-pattern>/AdminPage/memberList</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -24,7 +24,7 @@
     String sql = null;
     if (session.getAttribute("id") == null){
         response.sendRedirect("../LoginPage/");
-    }
+    } else {
 %>
 <html>
 <head>
@@ -106,6 +106,19 @@
                 ratingCount = rs.getInt(1);
             } catch (SQLException e){
                 e.printStackTrace();
+            } finally {
+                if (conn != null) {
+                    System.out.println("=======connection 종료===========");
+                    conn.close();
+                }
+                if (pstmt != null) {
+                    System.out.println("=======prepared statement 종료===========");
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    System.out.println("=======resultSet 종료===========");
+                    rs.close();
+                }
             }
         %>
         <div class="MyPageTopBar_info">
@@ -176,7 +189,8 @@
                             } catch (SQLException e){
                                 e.printStackTrace();
                             }
-                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ?) a where a.num BETWEEN 1 and 3 \n" +
+                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ?) a " +
+//                                    "where a.num BETWEEN 1 and 3 \n"
                                     "ORDER BY a.create_date DESC";
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
@@ -365,60 +379,9 @@
                                 }
                             }
                         %>
-<%--                        <div class="bid-card card row-flex spb">--%>
-<%--                            <div class="bid-left col-flex spb">--%>
-<%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                                <div class="bid-content row-flex">--%>
-<%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                                    <div class="bid-body col-flex">--%>
-<%--                                        <div class="card-title">Nike air Jordon</div>--%>
-<%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="bid-right col-flex spb">--%>
-<%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-<%--                                <div class="price">770000원</div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="bid-card card row-flex spb">--%>
-<%--                            <div class="bid-left col-flex spb">--%>
-<%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                                <div class="bid-content row-flex">--%>
-<%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                                    <div class="bid-body col-flex">--%>
-<%--                                        <div class="card-title">Nike air Jordon</div>--%>
-<%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="bid-right col-flex spb">--%>
-<%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-<%--                                <div class="price">770000원</div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="bid-card card row-flex spb">--%>
-<%--                            <div class="bid-left col-flex spb">--%>
-<%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-<%--                                <div class="bid-content row-flex">--%>
-<%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-<%--                                    <div class="bid-body col-flex">--%>
-<%--                                        <div class="card-title">Nike air Jordon</div>--%>
-<%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-<%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="bid-right col-flex spb">--%>
-<%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-<%--                                <div class="price">770000원</div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                     </div>
                 </div>
-                <div class="more_bid btn btn-primary" style="width: 100%">더보기</div>
+<%--                <div class="more_bid btn btn-primary" style="width: 100%">더보기</div>--%>
             </div>
         </div>
     </div>
@@ -518,3 +481,4 @@
     };
 </script>
 </html>
+<% } %>
