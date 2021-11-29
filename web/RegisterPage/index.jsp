@@ -127,12 +127,20 @@
             rs.close();
         }
     } else {
+        try {
             addressOptions = new ArrayList<String>();
             pstmt = conn.prepareStatement("SELECT name FROM Address");
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 addressOptions.add(rs.getString(1));
             }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            conn.close();
+            pstmt.close();
+            rs.close();
+        }
         %>
         <div class="container-fluid">
             <div class="border form-wrapper">
