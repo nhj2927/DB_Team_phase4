@@ -208,8 +208,7 @@
 </nav>
 <script>
     const selectCategory = (category_id, address) => {
-        location.href = './?category_id=' + category_id + '&address=' + address
-            + '&page=' + '<%=current_page%>';
+        location.href = './?category_id=' + category_id + '&address=' + address;
     }
     const selectPage = (page) => {
         let url = './?category_id=' + '<%=category_id%>'
