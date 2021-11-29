@@ -33,7 +33,7 @@
     Context context = new InitialContext();
     DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
     Connection conn = dataSource.getConnection();
-    String sql = "select * from report where report_id=?";
+    String sql = "select * from report r, item i where r.it_id = i.it_id and r.report_id=?";
     PreparedStatement pstmt = null;
     ResultSet rs = null;
 
@@ -53,7 +53,8 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h2 class="fw-bolder mb-1"><%=rs.getString(2)%></h2>
+                            <h2 class="fw-bolder mb-1">신고 상세 내용</h2>
+                            <h6>아이템명 : <%=rs.getString(7)%></h6>
                             <hr/>
                             <!-- Post meta content-->
                             <div class="kboard-detail">
@@ -82,10 +83,10 @@
                     <hr/>
                     <!-- Buttons -->
                     <div>
-                        <button class="btn btn-primary" href="#">게시글 확인</button>
+                        <button class="btn btn-primary" onclick="location.href='../DetailPage?item_id=<%=rs.getInt(4)%>'">게시글 확인</button>
                         <% if(rs.getString(5).equals(session.getAttribute("id").toString())){ %>
-                            <button id="DelReport" class="btn btn-danger" href="actions/DelReportAction.jsp?report_id=<%=report_id%>">리포트 삭제</button>
-                            <button id="DelItem"class="btn btn-danger" href="actions/DelItemAction.jsp?">게시글 삭제</button>
+                            <button id="DelReport" class="btn btn-danger" onclick="location.href='DelReportAction.jsp?report_id=<%=report_id%>'">리포트 삭제</button>
+                            <button id="DelItem"class="btn btn-danger" onclick="location.href='DelItemAction.jsp?it_id=<%=rs.getInt(4)%>'">게시글 삭제</button>
                         <%}%>
                         <button class="btn btn-secondary" onclick="history.back()">뒤로 가기</button>
                     </div>
@@ -99,5 +100,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

@@ -10,5 +10,5 @@
   session.invalidate();
 %>
 <script>
-  location.href="../LoginPage"
+  location.href="/DB_Phase4_war_exploded/LoginPage"
 </script>

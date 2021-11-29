@@ -45,10 +45,10 @@
                     <thead class="thead-dark">
                     <tr>
                         <th>번호</th>
-                        <th>제목</th>
+                        <th>신고된 아이템명</th>
                         <th>신고자</th>
                         <th>담당자</th>
-                        <th>등록일</th>
+                        <th>작성일</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,7 +60,7 @@
                         %>
                         <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
                             <td><%=tmp.getReportId()%></td>
-                            <td><%=tmp.getDescription()%></td>
+                            <td><%=tmp.getItname()%></td>
                             <td><%=tmp.getUid()%></td>
                             <td><%=tmp.getAdid()%></td>
                             <td>2021-11-21</td>
