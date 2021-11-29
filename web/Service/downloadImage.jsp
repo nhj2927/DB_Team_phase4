@@ -5,8 +5,6 @@
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="java.io.*" %>
-<%@ page import="java.nio.file.Path" %>
-<%@ page import="java.nio.file.Paths" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("utf-8");
