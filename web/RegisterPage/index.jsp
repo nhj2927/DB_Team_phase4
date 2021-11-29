@@ -107,11 +107,16 @@
                         session.setAttribute("average_score", 0);
                         session.setAttribute("tel", tel);
                         session.setAttribute("email", email);
-                        session.setAttribute("address", s.toArray(new String[0]));
-                        response.sendRedirect("../");
-                    } else {
-                        System.out.println("fail");
-                    }
+                        session.setAttribute("address", s.toArray(new String[0])); %>
+                        <script>
+                            alert("회원가입에 성공하였습니다");
+                            location.href = '../';
+                        </script>
+                    <% } else { %>
+                        <script>
+                            alert("회원가입에 실패하였습니다");
+                        </script>
+                    <% }
                 }
             }
         } catch (Exception e) {
@@ -122,13 +127,20 @@
             rs.close();
         }
     } else {
+        try {
             addressOptions = new ArrayList<String>();
             pstmt = conn.prepareStatement("SELECT name FROM Address");
             rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 addressOptions.add(rs.getString(1));
             }
-            int aaa = 3;
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            conn.close();
+            pstmt.close();
+            rs.close();
+        }
         %>
         <div class="container-fluid">
             <div class="border form-wrapper">
