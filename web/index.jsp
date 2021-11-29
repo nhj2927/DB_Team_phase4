@@ -92,7 +92,7 @@
 
         if (rs.next()) {
             int count = rs.getInt(1);
-            total_page = count / 8 + 1;
+            total_page = (count - 1) / 8 + 1;
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -137,13 +137,14 @@
     <%
         try {
             String sql = "SELECT * FROM (SELECT name, current_price, quick_price,"
-                    + " bid_count, expire_date, it_id, rownum as rnum, create_date FROM Item"
+                    + " bid_count, expire_date, it_id, rownum as rnum, create_date FROM ("
+                    + " SELECT * FROM Item "
                     + " WHERE c_id = ?"
                     + " AND ad_id = (SELECT ad_id FROM Address"
                     + " WHERE name = ?)"
                     + " AND expire_date > sysdate"
                     + " AND is_end = 0"
-                    + " ORDER BY create_date DESC)"
+                    + " ORDER BY create_date DESC))"
                     + " WHERE rnum BETWEEN ? AND ?";
             if (search != null) {
                 sql += " AND LOWER(name) LIKE '%" + search + "%'";
