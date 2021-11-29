@@ -11,6 +11,8 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -58,24 +60,36 @@
                         </thead>
                         <tbody>
                             <%
-                                sql = "with tmp as( " +
-                                        "select rownum as row_num, report.* from report where rownum <=10 order by report_id desc) " +
+                                sql = "with ordered_repo as( " +
+                                        "    select * " +
+                                        "    from report " +
+                                        "    order by create_date desc)" +
                                         "select * " +
-                                        "from tmp left outer join item on tmp.it_id=item.it_id " +
-                                        "order by tmp.row_num";
+                                        "from ordered_repo left outer join item on ordered_repo.it_id=item.it_id " +
+                                        "where rownum<=10";
                                 pstmt = conn.prepareStatement(sql);
                                 rs = pstmt.executeQuery();
                             %>
 
                             <% while (rs.next()){ %>
-                            <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=rs.getInt(2)%>'">
+                            <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=rs.getInt(1)%>'">
                                 <td><%=rs.getInt(1)%></td>
                                 <td><%=rs.getString(8)%></td>
-                                <td><%=rs.getString(4)%></td>
-                                <td><%=rs.getString(6)%></td>
-                                <td>2021-11-21</td>
+                                <td><%=rs.getString(3)%></td>
+                                <td><%=rs.getString(5)%></td>
+                                <td>
+                                    <%
+                                        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+                                        Date date = df.parse(rs.getString(6));
+                                        df = new SimpleDateFormat("yyyy-mm-dd");
+                                        out.print(df.format(date));
+                                    %>
+                                </td>
                             </tr>
-                            <% }%>
+                            <% }
+                                pstmt.close();
+                                rs.close();
+                            %>
                         </tbody>
                     </table>
                     <a class="btn btn-outline-dark pull-right" href="reportList">더보기</a>

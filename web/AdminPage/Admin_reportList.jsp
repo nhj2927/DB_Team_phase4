@@ -14,6 +14,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.Report"%>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -63,7 +65,9 @@
                             <td><%=tmp.getItname()%></td>
                             <td><%=tmp.getUid()%></td>
                             <td><%=tmp.getAdid()%></td>
-                            <td>2021-11-21</td>
+                            <td>
+                                <%=tmp.getDatetime().substring(0,tmp.getDatetime().lastIndexOf('.'))%>
+                            </td>
                         </tr>
                         <%
                             }
