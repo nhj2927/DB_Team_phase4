@@ -5,7 +5,27 @@
   Time: 오후 10:09
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="sun.security.krb5.internal.crypto.Des" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+  request.setCharacterEncoding("utf-8");
+  Connection conn = null;
+  PreparedStatement pstmt = null;
+  ResultSet rs = null;
+  ResultSet rs2 = null;
+  String sql = null;
+  if (session.getAttribute("id") == null){
+    response.sendRedirect("../LoginPage/");
+  }
+%>
 <html>
 <head>
   <script
@@ -44,13 +64,56 @@
     <div class="MyPageTopBar_Logo">
 
     </div>
+    <%
+      try {
+        Context context = new InitialContext();
+        DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+        conn = dataSource.getConnection();
+      } catch (SQLException e){
+        e.printStackTrace();
+      }
+      String id = (String) session.getAttribute("id");
+      int bidCount = 0;
+      int itemCount = 0;
+      int ratingCount = 0;
+      sql = "select count(*) from bid where u_id = ?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, id);
+      try{
+        rs = pstmt.executeQuery();
+        rs.next();
+        bidCount = rs.getInt(1);
+      } catch (SQLException e){
+        e.printStackTrace();
+      }
+      sql = "select count(*) from item where u_id = ?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, id);
+      try{
+        rs = pstmt.executeQuery();
+        rs.next();
+        itemCount = rs.getInt(1);
+      } catch (SQLException e){
+        e.printStackTrace();
+      }
+      sql = "select count(*) from rating where buy_id = ?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, id);
+      try{
+        rs = pstmt.executeQuery();
+        rs.next();
+        ratingCount = rs.getInt(1);
+      } catch (SQLException e){
+        e.printStackTrace();
+      }
+    %>
     <div class="MyPageTopBar_info">
       <div class="MyPage_info_comp" >
         <div class="mpage_comp_head">
           내 입찰
         </div>
         <div class="mpage_comp_content">
-          7<div class="gun">건</div>
+          <%=bidCount%><div class="gun">건</div>
         </div>
 
       </div>
@@ -59,7 +122,7 @@
           내 등록 상품
         </div>
         <div class="mpage_comp_content">
-          8<div class="gun">건</div>
+          <%=itemCount%><div class="gun">건</div>
         </div>
       </div>
       <div class="MyPage_info_comp">
@@ -67,7 +130,7 @@
           내 후기
         </div>
         <div class="mpage_comp_content">
-          3<div class="gun">건</div>
+          <%=ratingCount%><div class="gun">건</div>
         </div>
       </div>
     </div>
@@ -103,63 +166,188 @@
         </div>
         <div class="MyPageBody_content">
           <div class="cardBox">
-            <div class="bid-card card row-flex spb onSale">
-              <div class="bid-left col-flex spb">
-                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
-                <div class="bid-content row-flex">
-                  <img class="card-img" height="100px" width="100px" src="#">
-                  <div class="bid-body col-flex">
-                    <div class="card-title">Nike air Jordon</div>
-                    <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="buttons row-flex spb">
-                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+            <%
+              id = (String) session.getAttribute("id");
+              try {
+                Context context = new InitialContext();
+                DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+                conn = dataSource.getConnection();
+              } catch (SQLException e){
+                e.printStackTrace();
+              }
+              sql = "select * \n" +
+                      "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
+                      "        from item it, address ad\n" +
+                      "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
+                      "where a.num BETWEEN 1 and 3 \n" +
+                      "ORDER BY a.create_date DESC";
+              pstmt = conn.prepareStatement(sql);
+              pstmt.setString(1, id);
+              try {
+                rs = pstmt.executeQuery();
+                while(rs.next()){
+                  if (rs.getString(6).equals("0")){ //경매 진행중
+                    %>
+                      <div class="bid-card card row-flex spb onSale">
+                        <div class="bid-left col-flex spb">
+                          <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
+                          <div class="bid-content row-flex">
+                            <img class="card-img" height="100px" width="100px" src="#">
+                            <div class="bid-body col-flex">
+                              <div class="card-title"><%=rs.getString(3)%>></div>
+                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="buttons row-flex spb">
+                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bid-right col-flex spb">
+                          <div class="item-alarm-onSale alarm ">판매중</div>
+                          <div class="price">현재가격: <%=rs.getInt(5)%>원</div>
+                        </div>
+                      </div>
+                    <%
+                  } else if (rs.getString(6).equals("1")){ //낙찰
+                    %>
+                      <div class="bid-card card row-flex spb onSale">
+                        <div class="bid-left col-flex spb">
+                          <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
+                          <div class="bid-content row-flex">
+                            <img class="card-img" height="100px" width="100px" src="#">
+                            <div class="bid-body col-flex">
+                              <div class="card-title"><%=rs.getString(3)%>></div>
+                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="buttons row-flex spb">
+                                <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ItemModal">구매자 정보보기</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bid-right col-flex spb">
+                          <div class="item-alarm-onSale alarm ">낙찰완료</div>
+                          <div class="price">낙찰가격: <%=rs.getInt(5)%>원</div>
+                        </div>
+                      </div>
+                    <%
+                  } else if (rs.getString(6).equals("2")) { //기간 만료
+                    %>
+                    <div class="bid-card card row-flex spb onExpired">
+                      <div class="bid-left col-flex spb">
+                        <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> ~ <%=rs.getDate(7)%></div>
+                        <div class="bid-content row-flex">
+                          <img class="card-img" height="100px" width="100px" src="#">
+                          <div class="bid-body col-flex">
+                            <div class="card-title"><%=rs.getString(3)%>></div>
+                            <div class="card-address"><%=rs.getString(11)%>></div>
+                            <div class="buttons row-flex spb">
+                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
+                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bid-right col-flex spb">
+                        <div class="item-alarm-expired alarm ">기간만료</div>
+                        <div class="price">현재가격: <%=rs.getInt(5)%>원</div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bid-right col-flex spb">
-                <div class="item-alarm-onSale alarm ">판매중</div>
-                <div class="price">770000원</div>
-              </div>
-            </div>
-            <div class="bid-card card row-flex spb onFinish">
-              <div class="bid-left col-flex spb">
-                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
-                <div class="bid-content row-flex">
-                  <img class="card-img" height="100px" width="100px" src="#">
-                  <div class="bid-body col-flex">
-                    <div class="card-title">Nike air Jordon</div>
-                    <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>
-                  </div>
-                </div>
-              </div>
-              <div class="bid-right col-flex spb">
-                <div class="item-alarm-finish alarm ">거래완료</div>
-                <div class="price">770000원</div>
-              </div>
-            </div>
-            <div class="bid-card card row-flex spb onExpired">
-              <div class="bid-left col-flex spb">
-                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
-                <div class="bid-content row-flex">
-                  <img class="card-img" height="100px" width="100px" src="#">
-                  <div class="bid-body col-flex">
-                    <div class="card-title">Nike air Jordon</div>
-                    <div class="card-address">대구광역시 북구 복현동</div>
-                    <div class="buttons row-flex spb">
-                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bid-right col-flex spb">
-                <div class="item-alarm-expired alarm ">기간만료</div>
-                <div class="price">770000원</div>
-              </div>
-            </div>
+                    <%
+                  }else if (rs.getString(6).equals("3") || rs.getString(6).equals("4")){ //거래완료
+                    %>
+                      <div class="bid-card card row-flex spb onFinish">
+                        <div class="bid-left col-flex spb">
+                          <div class="bid-GoodFinishDate"><%=rs.getDate(7)%> 낙찰</div>
+                          <div class="bid-content row-flex">
+                            <img class="card-img" height="100px" width="100px" src="#">
+                            <div class="bid-body col-flex">
+                              <div class="card-title"><%=rs.getString(3)%>></div>
+                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bid-right col-flex spb">
+                          <div class="item-alarm-finish alarm ">거래완료</div>
+                          <div class="price">낙찰가격: <%=rs.getInt(5)%>원</div>
+                        </div>
+                      </div>
+                    <%
+                  }
+                }
+              } catch (SQLException e){
+                e.printStackTrace();
+              } finally {
+                if (conn != null) {
+                  conn.close();
+                }
+                if (pstmt != null) {
+                  pstmt.close();
+                }
+                if (rs != null) {
+                  rs.close();
+                }
+              }
+            %>
+
+<%--            <div class="bid-card card row-flex spb onSale">--%>
+<%--              <div class="bid-left col-flex spb">--%>
+<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
+<%--                <div class="bid-content row-flex">--%>
+<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
+<%--                  <div class="bid-body col-flex">--%>
+<%--                    <div class="card-title">Nike air Jordon</div>--%>
+<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
+<%--                    <div class="buttons row-flex spb">--%>
+<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>--%>
+<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="bid-right col-flex spb">--%>
+<%--                <div class="item-alarm-onSale alarm ">판매중</div>--%>
+<%--                <div class="price">770000원</div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="bid-card card row-flex spb onFinish">--%>
+<%--              <div class="bid-left col-flex spb">--%>
+<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
+<%--                <div class="bid-content row-flex">--%>
+<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
+<%--                  <div class="bid-body col-flex">--%>
+<%--                    <div class="card-title">Nike air Jordon</div>--%>
+<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
+<%--                    <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">상세보기</div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="bid-right col-flex spb">--%>
+<%--                <div class="item-alarm-finish alarm ">거래완료</div>--%>
+<%--                <div class="price">770000원</div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="bid-card card row-flex spb onExpired">--%>
+<%--              <div class="bid-left col-flex spb">--%>
+<%--                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
+<%--                <div class="bid-content row-flex">--%>
+<%--                  <img class="card-img" height="100px" width="100px" src="#">--%>
+<%--                  <div class="bid-body col-flex">--%>
+<%--                    <div class="card-title">Nike air Jordon</div>--%>
+<%--                    <div class="card-address">대구광역시 북구 복현동</div>--%>
+<%--                    <div class="buttons row-flex spb">--%>
+<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>--%>
+<%--                      <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="bid-right col-flex spb">--%>
+<%--                <div class="item-alarm-expired alarm ">기간만료</div>--%>
+<%--                <div class="price">770000원</div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
           </div>
         </div>
         <div class="more_bid btn btn-primary" style="width: 100%">더보기</div>

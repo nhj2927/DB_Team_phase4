@@ -98,13 +98,14 @@
     padding-top: 8px;
 }
 .cardBox {
-    height: 500px;
     border-radius: 10px;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     box-shadow: 0px 0px 1px grey;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .card {
     border-radius: 10px;
@@ -114,6 +115,8 @@
     margin-right: 20px;
     padding: 8px;
     box-shadow: 0px 0px 0.5px grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .bid-card {
     display: flex;
@@ -226,3 +229,4 @@ a{
 .onExpired .buttons .btn{
     width:100px;
 }
+
