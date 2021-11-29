@@ -24,7 +24,7 @@
   String sql = null;
   if (session.getAttribute("id") == null){
     response.sendRedirect("../LoginPage/");
-  }
+  } else {
 %>
 <html>
 <head>
@@ -105,6 +105,19 @@
         ratingCount = rs.getInt(1);
       } catch (SQLException e){
         e.printStackTrace();
+      } finally {
+        if (conn != null) {
+          System.out.println("=======connection 종료===========");
+          conn.close();
+        }
+        if (pstmt != null) {
+          System.out.println("=======prepared statement 종료===========");
+          pstmt.close();
+        }
+        if (rs != null) {
+          System.out.println("=======resultSet 종료===========");
+          rs.close();
+        }
       }
     %>
     <div class="MyPageTopBar_info">
@@ -401,3 +414,4 @@
 
 </script>
 </html>
+<% } %>

@@ -24,7 +24,7 @@
     String sql = null;
     if (session.getAttribute("id") == null) {
         response.sendRedirect("../LoginPage/");
-    }
+    } else {
 %>
 <html>
 <head>
@@ -58,7 +58,7 @@
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <title>HiAuction - 마이페이지</title>
     <link type="text/css" rel="stylesheet" href="../Public/css/MyPage_Main.css">
-    <lint type="text/scss" rel="stylesheet" href="./review.scss"/>
+    <lint type="text/css" rel="stylesheet" href="./review.css"/>
 </head>
 <body>
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
@@ -158,21 +158,9 @@
         <div class="MyPageSideBar">
             <div class="side-content">
                 <div class="side-title"><a href="bid.jsp">내 입찰 목록</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a></div>
-                <div class="side-body"><a href="#">후기 작성 필요</a></div>
-                <div class="side-body"><a href="#">거래 완료</a></div>
             </div>
             <div class="side-content">
                 <div class="side-title"><a href="items.jsp">내 등록 상품</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a></div>
-                <div class="side-body"><a href="#">후기 작성 필요</a></div>
-                <div class="side-body"><a href="#">거래 완료</a></div>
-            </div>
-            <div class="side-content">
-                <div class="side-title"><a href="reviews.jsp">내 후기</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a></div>
-                <div class="side-body"><a href="#">후기 작성 필요</a></div>
-                <div class="side-body"><a href="#">거래 완료</a></div>
             </div>
             <div class="side-content">
                 <div class="side-title"><a href="modify_User.jsp">회원정보 수정</a></div>
@@ -207,8 +195,8 @@
                                     System.out.println(rs.getInt(1) + "|" + rs.getInt(2) + "|" + rs.getInt(3));
                                     rs2 = pstmt.executeQuery();
 
-                                    while (rs2.next()) {
-                                        if (rs2.getString(8).equals("0")) { //경매 진행중
+                                    while(rs2.next()){
+                                        if (rs2.getString(8).equals("0")){ //경매 진행중
                         %>
                         <div class="bid-card card row-flex spb">
                             <div class="bid-left col-flex spb">
@@ -216,10 +204,8 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="#">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs2.getString(2)%>
-                                        </div>
-                                        <div class="card-address"><%=rs2.getString(18)%>
-                                        </div>
+                                        <div class="card-title"><%=rs2.getString(2)%></div>
+                                        <div class="card-address"><%=rs2.getString(18)%></div>
                                         <div class="bid-review-button btn-secondary btn" href="#">상세보기</div>
                                     </div>
                                 </div>
@@ -230,7 +216,7 @@
                             </div>
                         </div>
                         <%
-                        } else if (rs2.getString(8).equals("1")) { //낙찰
+                        } else if (rs2.getString(8).equals("1")){ //낙찰
                         %>
                         <div class="bid-card card row-flex spb">
                             <div class="bid-left col-flex spb">
@@ -238,16 +224,12 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="#">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs2.getString(2)%>
-                                        </div>
-                                        <div class="card-address"><%=rs2.getString(18)%>
-                                        </div>
+                                        <div class="card-title"><%=rs2.getString(2)%></div>
+                                        <div class="card-address"><%=rs2.getString(18)%></div>
                                         <%
                                             if (rs.getInt(3) == rs2.getInt(7)) {
                                         %>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal"
-                                             data-bs-target="#reviewModal">후기 작성하기
-                                        </div>
+                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">판매자와 연락하기</div>
                                         <%
                                         } else {
                                         %>
@@ -283,10 +265,8 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="#">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs2.getString(2)%>
-                                        </div>
-                                        <div class="card-address"><%=rs2.getString(18)%>
-                                        </div>
+                                        <div class="card-title"><%=rs2.getString(2)%></div>
+                                        <div class="card-address"><%=rs2.getString(18)%></div>
                                         <div class="bid-review-button btn-secondary btn" href="#">상세보기</div>
                                     </div>
                                 </div>
@@ -297,7 +277,7 @@
                             </div>
                         </div>
                         <%
-                        } else if (rs2.getString(8).equals("3")) { //후기 작성 필요
+                        }else if (rs2.getString(8).equals("3")){ //후기 작성 필요
                         %>
                         <div class="bid-card card row-flex spb">
                             <div class="bid-left col-flex spb">
@@ -305,16 +285,14 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="#">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs2.getString(2)%>
-                                        </div>
-                                        <div class="card-address"><%=rs2.getString(18)%>
-                                        </div>
+                                        <div class="card-title"><%=rs2.getString(2)%></div>
+                                        <div class="card-address"><%=rs2.getString(18)%></div>
                                         <%
                                             if (rs.getInt(3) == rs2.getInt(7)) {
+                                                System.out.println(rs2.getString(14));
+                                                //data-item="rs2.getInt(1)"
                                         %>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal"
-                                             data-bs-target="#reviewModal">후기 작성하기
-                                        </div>
+                                        <div class="bid-review-button btn-secondary btn" data-item="<%=rs2.getString(14)%>,<%=rs2.getInt(1)%>" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                         <%
                                         } else {
                                         %>
@@ -342,7 +320,7 @@
                             </div>
                         </div>
                         <%
-                        } else if (rs2.getString(8).equals("4")) { //거래완료
+                        } else if (rs2.getString(8).equals("4")){ //거래완료
                         %>
                         <div class="bid-card card row-flex spb">
                             <div class="bid-left col-flex spb">
@@ -350,10 +328,8 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="#">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs2.getString(2)%>
-                                        </div>
-                                        <div class="card-address"><%=rs2.getString(18)%>
-                                        </div>
+                                        <div class="card-title"><%=rs2.getString(2)%></div>
+                                        <div class="card-address"><%=rs2.getString(18)%></div>
                                         <div class="bid-review-button btn-secondary btn" href="#">상세보기</div>
                                     </div>
                                 </div>
@@ -397,57 +373,6 @@
                                 }
                             }
                         %>
-                        <%--                        <div class="bid-card card row-flex spb">--%>
-                        <%--                            <div class="bid-left col-flex spb">--%>
-                        <%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-                        <%--                                <div class="bid-content row-flex">--%>
-                        <%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-                        <%--                                    <div class="bid-body col-flex">--%>
-                        <%--                                        <div class="card-title">Nike air Jordon</div>--%>
-                        <%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-                        <%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                            <div class="bid-right col-flex spb">--%>
-                        <%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-                        <%--                                <div class="price">770000원</div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                        <div class="bid-card card row-flex spb">--%>
-                        <%--                            <div class="bid-left col-flex spb">--%>
-                        <%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-                        <%--                                <div class="bid-content row-flex">--%>
-                        <%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-                        <%--                                    <div class="bid-body col-flex">--%>
-                        <%--                                        <div class="card-title">Nike air Jordon</div>--%>
-                        <%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-                        <%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                            <div class="bid-right col-flex spb">--%>
-                        <%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-                        <%--                                <div class="price">770000원</div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                        <%--                        <div class="bid-card card row-flex spb">--%>
-                        <%--                            <div class="bid-left col-flex spb">--%>
-                        <%--                                <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>--%>
-                        <%--                                <div class="bid-content row-flex">--%>
-                        <%--                                    <img class="card-img" height="100px" width="100px" src="#">--%>
-                        <%--                                    <div class="bid-body col-flex">--%>
-                        <%--                                        <div class="card-title">Nike air Jordon</div>--%>
-                        <%--                                        <div class="card-address">대구광역시 북구 복현동</div>--%>
-                        <%--                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>--%>
-                        <%--                                    </div>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <%--                            <div class="bid-right col-flex spb">--%>
-                        <%--                                <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>--%>
-                        <%--                                <div class="price">770000원</div>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -610,34 +535,66 @@
                 <h5 class="modal-title" id="reviewModalLabel">후기 남기기</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="bid-card card row-flex spb">
-                    <div class="bid-left col-flex spb">
-                        <div class="bid-GoodFinishDate">2021.11.25 낙찰</div>
-                        <div class="bid-content row-flex">
-                            <img class="card-img" height="100px" width="100px" src="#">
-                            <div class="bid-body col-flex">
-                                <div class="card-title">Nike air Jordon</div>
-                                <div class="card-address">대구광역시 북구 복현동</div>
-
-                            </div>
+            <form action="review_action.jsp" method="post">
+                <div class="modal-body">
+                    <br>
+                    <input type="hidden" class="reviewType" name="type">
+                    <input type="hidden" class="itemUID" name="itemUID">
+                    <input type="hidden" class="itemID" name="itemID">
+                    <div class="starRapping">
+                        <div class="startRadio">
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s1" value="1" checked="checked">
+                                <span class="startRadio__img"><span class="blind">별 1개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s1.5" value="1.5">
+                                <span class="startRadio__img"><span class="blind">별 1.5개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s2" value="2">
+                                <span class="startRadio__img"><span class="blind">별 2개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s2.5" value="2.5">
+                                <span class="startRadio__img"><span class="blind">별 2.5개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s3" value="3">
+                                <span class="startRadio__img"><span class="blind">별 3개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s3.5" value="3.5">
+                                <span class="startRadio__img"><span class="blind">별 3.5개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s4" value="4">
+                                <span class="startRadio__img"><span class="blind">별 4개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s4.5" value="4.5">
+                                <span class="startRadio__img"><span class="blind">별 4.5개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="s5" value="5">
+                                <span class="startRadio__img"><span class="blind">별 5개</span></span>
+                            </label>
+                            <label class="startRadio__box">
+                                <input type="radio" name="star" id="" value="5.5">
+                                <span class="startRadio__img"><span class="blind">별 5.5개</span></span>
+                            </label>
                         </div>
                     </div>
-                    <div class="bid-right col-flex spb">
-                        <div class="bid-alarm-review alarm ">후기<br>작성 필요</div>
-                        <div class="price">770000원</div>
+                    <br><br>
+                    <div class="mb-3" style="padding-left: 20px;padding-right: 20px">
+                        <textarea class="form-control" id="FormControlTextarea" name="reviewText" rows="5" placeholder="거래 후기를 남겨주세요!!"></textarea>
                     </div>
                 </div>
-                <br>
-                <div class="mb-3" style="padding-left: 20px;padding-right: 20px">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
-                              placeholder="거래 후기를 남겨주세요!!"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" onclick="reviewEnroll(this.form)">후기 등록</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">후기 등록</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -681,4 +638,27 @@
     </div>
 </div>
 </body>
+<script>
+    let Item_U_id = -1;
+    let Item_id = -1;
+    $('#reviewModal').on('show.bs.modal', function (e) {
+        alert("show");
+        Item_U_id = $(e.relatedTarget).data('item').split(",");
+        alert(Item_U_id[0]);
+        //Item_U_id = $(e.relatedTarget).data('itemUid');
+        alert(Item_U_id[1]);
+        //alert(Item_U_id);
+    });
+    function reviewEnroll(form){
+        if (form.FormControlTextarea.value != ""){
+            $('.reviewType').val('enroll');
+            $('.itemUID').val(Item_U_id[0]);
+            $('.itemID').val(Item_U_id[1]);
+            form.submit();
+        }else{
+            alert("글을 써주세요");
+        }
+    };
+</script>
 </html>
+<% } %>

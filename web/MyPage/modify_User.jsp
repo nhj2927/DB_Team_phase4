@@ -24,6 +24,7 @@
     if (session.getAttribute("id") == null){
         response.sendRedirect("../LoginPage/");
     }
+    else {
 
     String type = request.getParameter("type");
     System.out.println(type);
@@ -115,6 +116,7 @@
                 }
         }
     }
+
 %>
 <html>
 <head>
@@ -454,3 +456,4 @@
 
 </script>
 </html>
+<% } %>
