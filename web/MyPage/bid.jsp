@@ -64,6 +64,7 @@
 <div class="MyPageBox">
     <div class="MyPageTopBar">
         <div class="MyPageTopBar_Logo">
+            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
         </div>
         <%
             try {

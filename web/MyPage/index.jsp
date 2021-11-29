@@ -65,7 +65,7 @@
 <div class="MyPageBox">
     <div class="MyPageTopBar">
         <div class="MyPageTopBar_Logo">
-
+            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
         </div>
         <%
             try {
@@ -202,7 +202,7 @@
                             <div class="bid-left col-flex spb">
                                 <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> 입찰</div>
                                 <div class="bid-content row-flex">
-                                    <img class="card-img" height="100px" width="100px" src="#">
+                                    <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs2.getInt(1)%>">
                                     <div class="bid-body col-flex">
                                         <div class="card-title"><%=rs2.getString(2)%></div>
                                         <div class="card-address"><%=rs2.getString(18)%></div>
@@ -222,7 +222,7 @@
                             <div class="bid-left col-flex spb">
                                 <div class="bid-GoodFinishDate"><%=rs2.getDate(9)%> 낙찰</div>
                                 <div class="bid-content row-flex">
-                                    <img class="card-img" height="100px" width="100px" src="#">
+                                    <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs2.getInt(1)%>">
                                     <div class="bid-body col-flex">
                                         <div class="card-title"><%=rs2.getString(2)%></div>
                                         <div class="card-address"><%=rs2.getString(18)%></div>
@@ -263,7 +263,7 @@
                             <div class="bid-left col-flex spb">
                                 <div class="bid-GoodFinishDate"><%=rs.getDate(4)%> 입찰</div>
                                 <div class="bid-content row-flex">
-                                    <img class="card-img" height="100px" width="100px" src="#">
+                                    <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs2.getInt(1)%>">
                                     <div class="bid-body col-flex">
                                         <div class="card-title"><%=rs2.getString(2)%></div>
                                         <div class="card-address"><%=rs2.getString(18)%></div>
@@ -283,7 +283,7 @@
                             <div class="bid-left col-flex spb">
                                 <div class="bid-GoodFinishDate"><%=rs2.getDate(9)%> 낙찰</div>
                                 <div class="bid-content row-flex">
-                                    <img class="card-img" height="100px" width="100px" src="#">
+                                    <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs2.getInt(1)%>">
                                     <div class="bid-body col-flex">
                                         <div class="card-title"><%=rs2.getString(2)%></div>
                                         <div class="card-address"><%=rs2.getString(18)%></div>
@@ -332,7 +332,7 @@
                             <div class="bid-left col-flex spb">
                                 <div class="bid-GoodFinishDate"><%=rs2.getDate(9)%> 낙찰</div>
                                 <div class="bid-content row-flex">
-                                    <img class="card-img" height="100px" width="100px" src="#">
+                                    <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs2.getInt(1)%>">
                                     <div class="bid-body col-flex">
                                         <div class="card-title"><%=rs2.getString(2)%></div>
                                         <div class="card-address"><%=rs2.getString(18)%></div>
