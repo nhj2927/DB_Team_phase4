@@ -62,7 +62,7 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form onsubmit="searchItem()" style="display: flex">
+                        <form style="display: flex">
                             <select class="input-select">
                                 <option value="0">검색</option>
                             </select>
@@ -149,13 +149,19 @@
 </header>
 <!-- /HEADER -->
 <script>
+    $('#search-input').keypress((e)=>{
+        if(e.keyCode == 13){
+            e.preventDefault();
+            searchItem();
+        }
+    })
     const searchItem = () => {
         const address = '<%=address%>';
         const category_id = '<%=category_id%>';
         const search = $('#search-input').val();
         let url = '/DB_Team_phase4_war_exploded/?';
         if (search) {
-            url += 'search=' + search;
+            url += 'search=' + search.toLowerCase();
         }
         if (address !== 'null') {
             url += '&address=' + address;

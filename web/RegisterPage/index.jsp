@@ -153,10 +153,6 @@
                         <label for="inputPassword" class="form-label">비밀번호</label>
                         <input type="password" class="form-control" name="password" id="inputPassword">
                     </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="confirmPassword">
-                    </div>
                     <div class="mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <label for="description" class="form-label">한줄 소개</label>
                         <input type="text" class="form-control" name="description" id="description">

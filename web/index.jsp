@@ -88,7 +88,7 @@
 
         if (rs.next()) {
             int count = rs.getInt(1);
-            total_page = count / 16 + 1;
+            total_page = count / 8 + 1;
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -133,22 +133,22 @@
     <%
         try {
             String sql = "SELECT * FROM (SELECT name, current_price, quick_price,"
-                    + " bid_count, expire_date, it_id, rownum as rnum FROM Item"
+                    + " bid_count, expire_date, it_id, rownum as rnum, create_date FROM Item"
                     + " WHERE c_id = ?"
                     + " AND ad_id = (SELECT ad_id FROM Address"
                     + " WHERE name = ?)"
                     + " AND expire_date > sysdate"
                     + " AND is_end = 0"
-                    + " ORDER BY expire_date)"
+                    + " ORDER BY create_date DESC)"
                     + " WHERE rnum BETWEEN ? AND ?";
             if (search != null) {
-                sql += " AND name LIKE '%" + search + "%'";
+                sql += " AND LOWER(name) LIKE '%" + search + "%'";
             }
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, category_id);
             pstmt.setString(2, address);
-            pstmt.setInt(3, 16 * (Integer.valueOf(current_page) - 1) + 1);
-            pstmt.setInt(4, 16 * (Integer.valueOf(current_page)));
+            pstmt.setInt(3, 8 * (Integer.valueOf(current_page) - 1) + 1);
+            pstmt.setInt(4, 8 * (Integer.valueOf(current_page)));
             rs = pstmt.executeQuery();
             int count = 0;
             while (rs.next()) {
@@ -156,7 +156,8 @@
     <div class="item-wrapper row mt-5">
         <% } %>
         <div class="item card col" onclick="selectItem('<%=rs.getInt(6)%>')">
-            <img src="./Service/downloadImage.jsp?it_id=<%=rs.getInt(6)%>" class="card-img-top"/>
+            <img src="./Service/downloadImage.jsp?it_id=<%=rs.getInt(6)%>" class="card-img-top"
+                style="height: 45%"/>
             <div class="card-body align-center">
                 <div class="item-name"><%=rs.getString(1)%>
                 </div>
@@ -172,6 +173,9 @@
     </div>
     <% }
         count++; %>
+    <% }
+    if (count % 4 != 0 && count > 0) { %>
+        </div>
     <% }
     } catch (Exception e) {
         e.printStackTrace();
