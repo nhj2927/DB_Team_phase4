@@ -12,7 +12,7 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Vo.Report"%>
+<%@ page import="vo.Report"%>
 <%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,14 +34,6 @@
 </head>
 <jsp:include page="../Public/jsp/AdminHeader.jsp"></jsp:include>
 <body>
-<%--<%--%>
-<%--    Context context = new InitialContext();--%>
-<%--    DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");--%>
-<%--    Connection conn = dataSource.getConnection();--%>
-<%--    String sql = "";--%>
-<%--    PreparedStatement pstmt = null;--%>
-<%--    ResultSet rs = null;--%>
-<%--%>--%>
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <jsp:include page="../Public/jsp/AdminSidebar.jsp"></jsp:include>
@@ -60,42 +52,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%
-                        ArrayList<Report> reports = (ArrayList<Report>) request.getAttribute("reportList");
-                        Iterator<Report> iterator = reports.iterator();
-                        while(iterator.hasNext()){
-                            Report tmp = iterator.next();
-                    %>
-                    <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
-                        <td><%=tmp.getReportId()%></td>
-                        <td><%=tmp.getDescription()%></td>
-                        <td><%=tmp.getUid()%></td>
-                        <td><%=tmp.getAdid()%></td>
-                        <td>2021-11-21</td>
-                    </tr>
-                    <%
-                        }
-                    %>
+                        <%
+                            ArrayList<Report> reports = (ArrayList<Report>) request.getAttribute("reportList");
+                            Iterator<Report> iterator = reports.iterator();
+                            while(iterator.hasNext()){
+                                Report tmp = iterator.next();
+                        %>
+                        <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
+                            <td><%=tmp.getReportId()%></td>
+                            <td><%=tmp.getDescription()%></td>
+                            <td><%=tmp.getUid()%></td>
+                            <td><%=tmp.getAdid()%></td>
+                            <td>2021-11-21</td>
+                        </tr>
+                        <%
+                            }
+                        %>
                     </tbody>
                 </table>
                 <br>
                 <div>
-                    <jsp:include page="paging.jsp">
+                    <jsp:include page="reportlist_paging.jsp">
                         <jsp:param value="${paging.page}" name="page"/>
                         <jsp:param value="${paging.beginPage}" name="beginPage"/>
                         <jsp:param value="${paging.endPage}" name="endPage"/>
                         <jsp:param value="${paging.prev}" name="prev"/>
                         <jsp:param value="${paging.next}" name="next"/>
                     </jsp:include>
-                </div>
-                <div class="text-center">
-                    <ul class="reviews-pagination">
-<%--                        <li><a href="#">1</a></li>--%>
-<%--                        <li><a href="#">2</a></li>--%>
-<%--                        <li><a href="#">3</a></li>--%>
-<%--                        <li><a href="#">4</a></li>--%>
-<%--                        <li><a href="#">5</a></li>--%>
-                    </ul>
                 </div>
             </div>
         </div>

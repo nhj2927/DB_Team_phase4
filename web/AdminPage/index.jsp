@@ -83,7 +83,7 @@
                 <br>
                 <!-- 회원 관리 -->
                 <div class = "container">
-                    <h2>회원 관리</h2>
+                    <h2>가장 많이 신고된 회원</h2>
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -124,7 +124,7 @@
                             %>
                         </tbody>
                     </table>
-                    <a class="btn btn-outline-dark pull-right" href="Admin_memberList.jsp">더보기</a>
+                    <a class="btn btn-outline-dark pull-right" href="memberList">회원관리 페이지-></a>
                     <br>
                 </div>
                 <!-- 회원 관리 -->

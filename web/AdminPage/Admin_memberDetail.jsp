@@ -33,15 +33,14 @@
     Context context = new InitialContext();
     DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
     Connection conn = dataSource.getConnection();
-    String sql = "with reported_num as(\n" +
-            "    select m.u_id as ruid, count(*) as rnum\n" +
-            "    from member m, report r\n" +
-            "    where m.u_id=r.u_id\n" +
-            "    group by m.u_id)\n" +
-            "select *\n" +
-            "from member m, reported_num r\n" +
-            "where m.u_id=r.ruid\n" +
-            "and m.u_id = ?";
+    String sql = "with reported_num as( " +
+            "    select m.u_id as ruid, count(*) as rnum " +
+            "    from member m, report r " +
+            "    where m.u_id=r.u_id " +
+            "    group by m.u_id) " +
+            "select * " +
+            "from member m left outer join reported_num r on m.u_id=r.ruid " +
+            "where m.u_id = ?";
 
     PreparedStatement pstmt = null;
     ResultSet rs = null;

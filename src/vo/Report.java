@@ -1,4 +1,4 @@
-package Vo;
+package vo;
 
 public class Report {
     int reportId;

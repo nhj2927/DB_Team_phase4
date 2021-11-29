@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Admin_memberList.jsp" class="nav-link px-0 align-middle text-white">
+                    <a href="memberList" class="nav-link px-0 align-middle text-white">
                         <i class="fas fa-tasks"></i>
                         </i> <span class="ms-1 d-none d-sm-inline">회원 관리</span></a>
                 </li>
