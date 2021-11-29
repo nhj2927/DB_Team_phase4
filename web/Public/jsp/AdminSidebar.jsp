@@ -89,7 +89,7 @@
     <!-- Modal for AddAdmin -->
     <script>
         $('#Logout').click(()=>{
-            location.href = "LogoutAction.jsp"
+            location.href = "../Service/LogoutAction.jsp"
         })
     </script>
 </body>
