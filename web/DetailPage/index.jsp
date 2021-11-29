@@ -47,6 +47,7 @@
 <body>
 <%
     String[] addressList = (String[]) session.getAttribute("address");
+    String id = (String) session.getAttribute("id");
     String item_id = request.getParameter("item_id");
     if (addressList == null || addressList.length == 0) { %>
 <script>location.href = "../LoginPage/index.jsp"</script>
@@ -62,7 +63,7 @@
 
         String sql = "SELECT I.name, I.start_price, I.current_price,"
                 + " I.quick_price, I.min_bid_unit, I.bid_count,"
-                + " I.expire_date, I.description, I.it_id, M.average_score"
+                + " I.expire_date, I.description, I.it_id, M.average_score, M.u_id"
                 + " FROM Item I, Member M"
                 + " WHERE I.u_id = M.u_id"
                 + " AND I.it_id = ?";
@@ -190,26 +191,46 @@
         </div>
     </div>
     <script>
-        const bid = () => {
-            const price = $('#bid-price-input').val();
-            if (parseInt(price) <= '<%=rs.getInt(3)%>') {
-                alert("현재가보다 높아야합니다");
-            } else if (parseInt(price) >= '<%=rs.getInt(4)%>') {
-                alert("즉시 구매해주세요");
-            } else if ((parseInt(price) - '<%=rs.getInt(3)%>') % '<%=rs.getInt(5)%>' !== 0) {
-                alert("최소 입찰 단위를 맞추세요");
+        const check = () => {
+            if ('<%=id%>' === '<%=rs.getString(11)%>') {
+                return false;
             } else {
-                location.href = '../Service/bid.jsp?item_id=' + '<%=item_id%>'
-                    + '&price=' + price;
+                return true;
+            }
+        }
+        const bid = () => {
+            if (!check()) {
+                alert("본인이 등록한 상품은 입찰할 수 없습니다");
+                location.reload();
+            } else {
+                const price = $('#bid-price-input').val();
+                if (parseInt(price) <= '<%=rs.getInt(3)%>') {
+                    alert("현재가보다 높아야합니다");
+                } else if (parseInt(price) >= '<%=rs.getInt(4)%>') {
+                    alert("즉시 구매해주세요");
+                } else if ((parseInt(price) - '<%=rs.getInt(3)%>') % '<%=rs.getInt(5)%>' !== 0) {
+                    alert("최소 입찰 단위를 맞추세요");
+                } else {
+                    location.href = '../Service/bid.jsp?item_id=' + '<%=item_id%>'
+                        + '&price=' + price;
+                }
             }
         }
         const quick = () => {
-            location.href = '../Service/quick.jsp?item_id=' + '<%=item_id%>'
+            if (!check()) {
+                location.href = '../Service/quick.jsp?item_id=' + '<%=item_id%>'
                     + '&price=' + '<%=rs.getInt(4)%>';
+            } else {
+                location.reload();
+            }
         }
         const report = () => {
-            location.href = '../Service/report.jsp?item_id=' + '<%=item_id%>'
+            if (!check()) {
+                location.href = '../Service/report.jsp?item_id=' + '<%=item_id%>'
                     + '&content=' + $('#report-input').val().replace(/(\n|\r\n)/g, '%0a');
+            } else {
+                location.reload();
+            }
         }
     </script>
     <% }
