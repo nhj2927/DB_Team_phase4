@@ -4,8 +4,9 @@
 <%@ page import="javax.naming.Context" %>
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.naming.InitialContext" %>
-<%@ page import="java.io.InputStream" %>
-<%@ page import="java.io.OutputStream" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.nio.file.Path" %>
+<%@ page import="java.nio.file.Paths" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("utf-8");
@@ -14,6 +15,7 @@
     ResultSet rs = null;
     InputStream is = null;
     OutputStream os = null;
+    File image = null;
 
     String it_id = request.getParameter("it_id");
     if (it_id != null) {
@@ -36,8 +38,24 @@
             int num;
             byte buf[] = new byte[1024];
 
-            while ((num = is.read(buf)) != -1) {
-                os.write(buf, 0, num);
+            if(is.available() == 0){
+                String realPath = request.getServletContext().getRealPath("/");
+                String rootPath = realPath.substring(0, realPath.indexOf("out"));
+                image = new File(rootPath + "web/Public/image/default.png");
+                FileInputStream ifo = new FileInputStream(image);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                while((num = ifo.read(buf)) != -1){
+                    baos.write(buf, 0, num);
+                }
+                byte[] imgbuf = null;
+                imgbuf = baos.toByteArray();
+                baos.close();
+                ifo.close();
+                os.write(imgbuf, 0, imgbuf.length);
+            } else {
+                while ((num = is.read(buf)) != -1) {
+                    os.write(buf, 0, num);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

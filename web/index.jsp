@@ -80,7 +80,11 @@
         String sql = "SELECT COUNT(*) FROM Item"
                 + " WHERE c_id = ?"
                 + " AND ad_id = (SELECT ad_id FROM Address"
-                + " WHERE name = ?)";
+                + " WHERE name = ?)"
+                + " AND is_end = '0'";
+        if (search != null) {
+            sql += " AND LOWER(name) LIKE '%" + search + "%'";
+        }
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, category_id);
         pstmt.setString(2, address);
@@ -157,7 +161,7 @@
         <% } %>
         <div class="item card col" onclick="selectItem('<%=rs.getInt(6)%>')">
             <img src="./Service/downloadImage.jsp?it_id=<%=rs.getInt(6)%>" class="card-img-top"
-                style="height: 45%"/>
+                 style="height: 45%"/>
             <div class="card-body align-center">
                 <div class="item-name"><%=rs.getString(1)%>
                 </div>
@@ -174,54 +178,58 @@
     <% }
         count++; %>
     <% }
-    if (count % 4 != 0 && count > 0) { %>
-        </div>
-    <% }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        if (conn != null) {
-            conn.close();
-        }
-        if (pstmt != null) {
-            pstmt.close();
-        }
-        if (rs != null) {
-            rs.close();
-        }
+        if (count % 4 != 0 && count > 0) { %>
+</div>
+<% }
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    if (conn != null) {
+        conn.close();
     }
-    %>
-    <nav class="mt-5 mb-5" aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <% for (int i = 0; i < total_page; i++) { %>
-            <li class="page-item" onclick="selectPage('<%=i + 1%>')">
-                <a class="page-link"><%=i + 1%>
-                </a>
-            </li>
-            <% } %>
-        </ul>
-    </nav>
-    <script>
-        const selectCategory = (category_id, address) => {
-            location.href = './?category_id=' + category_id + '&address=' + address
-                + '&page=' + '<%=current_page%>';
+    if (pstmt != null) {
+        pstmt.close();
+    }
+    if (rs != null) {
+        rs.close();
+    }
+}
+%>
+<nav class="mt-5 mb-5" aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <% for (int i = 0; i < total_page; i++) { %>
+        <li class="page-item" onclick="selectPage('<%=i + 1%>')">
+            <a class="page-link"><%=i + 1%>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+</nav>
+<script>
+    const selectCategory = (category_id, address) => {
+        location.href = './?category_id=' + category_id + '&address=' + address
+            + '&page=' + '<%=current_page%>';
+    }
+    const selectPage = (page) => {
+        let url = './?category_id=' + '<%=category_id%>'
+            + '&address=' + '<%=address%>' + '&page=' + page;
+        if ('<%=search%>' !== 'null') {
+            url += '&search=' + '<%=search%>';
         }
-        const selectPage = (page) => {
-            location.href = './?category_id=' + '<%=category_id%>'
-                + '&address=' + '<%=address%>' + '&page=' + page;
-        }
-        const selectItem = (item_id) => {
-            location.href = './DetailPage?item_id=' + item_id;
-        }
-        const registerItem = () => {
-            location.href = './RegisterItemPage';
-        }
-        $('.address-select').change(() => {
-            location.href = './?category_id=' + '<%=category_id%>'
-                + '&address=' + $('.address-select option:selected').val()
-                + '&page=' + '<%=current_page%>';
-        });
-    </script>
+        location.href = url;
+    }
+    const selectItem = (item_id) => {
+        location.href = './DetailPage?item_id=' + item_id;
+    }
+    const registerItem = () => {
+        location.href = './RegisterItemPage';
+    }
+    $('.address-select').change(() => {
+        location.href = './?category_id=' + '<%=category_id%>'
+            + '&address=' + $('.address-select option:selected').val()
+            + '&page=' + '<%=current_page%>';
+    });
+</script>
 </div>
 <% } %>
 </body>
