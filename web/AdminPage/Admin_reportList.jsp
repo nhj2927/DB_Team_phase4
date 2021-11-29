@@ -14,6 +14,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.Report"%>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -55,15 +57,23 @@
                         <%
                             ArrayList<Report> reports = (ArrayList<Report>) request.getAttribute("reportList");
                             Iterator<Report> iterator = reports.iterator();
+                            int totalcount = (int)request.getAttribute("totalcount");
+                            int cur_page = 1;
+                            if(request.getParameter("page") != null){
+                                cur_page = Integer.parseInt(request.getParameter("page"));
+                            }
+                            totalcount = totalcount-((cur_page-1)*10);
                             while(iterator.hasNext()){
                                 Report tmp = iterator.next();
                         %>
                         <tr style="cursor:pointer;" onclick="location.href='Admin_reportDetail.jsp?report_id=<%=tmp.getReportId()%>'">
-                            <td><%=tmp.getReportId()%></td>
+                            <td><%=totalcount--%></td>
                             <td><%=tmp.getItname()%></td>
                             <td><%=tmp.getUid()%></td>
                             <td><%=tmp.getAdid()%></td>
-                            <td>2021-11-21</td>
+                            <td>
+                                <%=tmp.getDatetime().substring(0,tmp.getDatetime().lastIndexOf('.'))%>
+                            </td>
                         </tr>
                         <%
                             }

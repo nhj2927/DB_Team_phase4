@@ -154,7 +154,7 @@
 <div class="MyPageBox">
     <div class="MyPageTopBar">
         <div class="MyPageTopBar_Logo">
-
+            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
         </div>
         <%
             try {
@@ -231,21 +231,9 @@
         <div class="MyPageSideBar">
             <div class="side-content">
                 <div class="side-title"><a href="bid.jsp">내 입찰 목록</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a> </div>
-                <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-                <div class="side-body"><a href="#">거래 완료</a> </div>
             </div>
             <div class="side-content">
                 <div class="side-title"><a href="items.jsp">내 등록 상품</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a> </div>
-                <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-                <div class="side-body"><a href="#">거래 완료</a> </div>
-            </div>
-            <div class="side-content">
-                <div class="side-title"><a href="reviews.jsp">내 후기</a></div>
-                <div class="side-body"><a href="#">낙찰 완료</a> </div>
-                <div class="side-body"><a href="#">후기 작성 필요</a> </div>
-                <div class="side-body"><a href="#">거래 완료</a> </div>
             </div>
             <div class="side-content">
                 <div class="side-title"><a href="modify_User.jsp">회원정보 수정</a></div>
