@@ -217,18 +217,20 @@
         }
         const quick = () => {
             if (!check()) {
+                alert("본인이 등록한 상품은 구매할 수 없습니다");
+                location.reload();
+            } else {
                 location.href = '../Service/quick.jsp?item_id=' + '<%=item_id%>'
                     + '&price=' + '<%=rs.getInt(4)%>';
-            } else {
-                location.reload();
             }
         }
         const report = () => {
             if (!check()) {
+                alert("본인이 등록한 상품은 신고할 수 없습니다");
+                location.reload();
+            } else {
                 location.href = '../Service/report.jsp?item_id=' + '<%=item_id%>'
                     + '&content=' + $('#report-input').val().replace(/(\n|\r\n)/g, '%0a');
-            } else {
-                location.reload();
             }
         }
     </script>
