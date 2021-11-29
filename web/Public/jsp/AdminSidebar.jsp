@@ -25,7 +25,7 @@
                     <span class="d-none d-sm-inline mx-1"><%=adminID%></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a id="Logout"class="dropdown-item">Log out</a></li>
+                    <li><a id="Logout"class="dropdown-item" href="/DB_Team_phase4_war_exploded/Service/LogoutAction.jsp">Log out</a></li>
                 </ul>
             </div>
             <!-- admin profile-->
@@ -64,12 +64,12 @@
                 <div class="modal-body">
                     <div class="container">
                         <div style="padding-top: 20px;">
-                            <form method="post" action="AdminjoinAction.jsp">
+                            <form method="post" action="/DB_Team_phase4_war_exploded/AdminPage/AdminjoinAction.jsp">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="관리자 아이디" name="AdminID" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="비밀번호" name="AdminPassword" maxlength="20">
+                                    <input type="password" class="form-control" placeholder="비밀번호" name="AdminPW" maxlength="20">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="이름" name="AdminName" maxlength="20">
@@ -87,10 +87,5 @@
         </div>
     </div>
     <!-- Modal for AddAdmin -->
-    <script>
-        $('#Logout').click(()=>{
-            location.href = "/DB_Phase4_war_exploded/Service/LogoutAction.jsp"
-        })
-    </script>
 </body>
 

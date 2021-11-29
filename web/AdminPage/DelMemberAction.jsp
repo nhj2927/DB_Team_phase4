@@ -24,24 +24,35 @@
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1,memberID);
     pstmt.executeUpdate();
-    //삭제한 회원이 입찰한 아이템의 current price 변경하기
+    pstmt.close();
 
-    sql = "select i.it_id, MAX(b.price)" +
-            " from bid b, item i" +
-            " where b.it_id = i.it_id AND i.Is_end = 0" +
-            "                    AND b.u_id = ?" +
-            " GROUP BY i.it_id";
+    //삭제한 회원이 입찰한 아이템의 current price 변경하기
+    sql = "with tmp as( " +
+            "    select distinct i.it_id as itid " +
+            "    from item i , bid b " +
+            "    where i.it_id = b.it_id " +
+            "    and i.is_end=0"+
+            "    and b.u_id = ?)" +
+            "select MAX(b.price), tmp.itid " +
+            "from tmp, bid b " +
+            "where tmp.itid=b.it_id " +
+            "and b.u_id is not null " +
+            "group by tmp.itid";
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, memberID);
     ResultSet rs = pstmt.executeQuery();
+    pstmt.close();
+
+    sql = "UPDATE ITEM SET Current_price = ? WHERE it_id = ?";
+    pstmt = conn.prepareStatement(sql);
 
     while(rs.next()){
-        sql = "UPDATE ITEM SET Current_price = ? WHERE it_id = ?";
         pstmt.setInt(1, rs.getInt(1));
-        pstmt.setString(2, rs.getString(2));
-        pstmt.executeUpdate();
+        pstmt.setInt(2, rs.getInt(2));
+        pstmt.addBatch();
+        pstmt.clearParameters();
     }
-    pstmt.executeUpdate();
+    pstmt.executeBatch();
 
     conn.close();
     pstmt.close();
