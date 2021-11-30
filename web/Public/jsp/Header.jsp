@@ -48,12 +48,12 @@
         <!-- container -->
         <div class="container">
             <!-- row -->
-            <div class="row">
+            <div class="row" style="margin-top: 1.5rem">
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+                        <a href="/DB_Team_phase4_war_exploded/" class="logo">
+                            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="width: 200px;">
                         </a>
                     </div>
                 </div>
