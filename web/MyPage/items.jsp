@@ -238,7 +238,7 @@
                           </div>
                         </div>
                         <div class="bid-right col-flex spb">
-                          <div class="item-alarm-onSale alarm ">낙찰완료</div>
+                          <div class="item-alarm-bidfinish alarm ">낙찰완료</div>
                           <div class="price">낙찰가격: <%=rs.getInt(5)%>원</div>
                         </div>
                       </div>
