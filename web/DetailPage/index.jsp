@@ -204,16 +204,8 @@
                 location.reload();
             } else {
                 const price = $('#bid-price-input').val();
-                if (parseInt(price) <= '<%=rs.getInt(3)%>') {
-                    alert("현재가보다 높아야합니다");
-                } else if (parseInt(price) >= '<%=rs.getInt(4)%>') {
-                    alert("즉시 구매해주세요");
-                } else if ((parseInt(price) - '<%=rs.getInt(3)%>') % '<%=rs.getInt(5)%>' !== 0) {
-                    alert("최소 입찰 단위를 맞추세요");
-                } else {
-                    location.href = '../Service/bid.jsp?item_id=' + '<%=item_id%>'
-                        + '&price=' + price;
-                }
+                location.href = '../Service/bid.jsp?item_id=' + '<%=item_id%>'
+                    + '&price=' + price;
             }
         }
         const quick = () => {
