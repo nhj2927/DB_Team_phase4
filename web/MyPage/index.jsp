@@ -229,7 +229,13 @@
                                         <%
                                             if (rs.getInt(3) == rs2.getInt(7)) {
                                         %>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">판매자와 연락하기</div>
+                                        <form action="bid.jsp" method="post">
+                                            <input type="hidden" class="watchSeller" name="watchSeller">
+                                            <input type="hidden" class="seller_id" name="seller_id" value="<%=rs2.getString(14)%>">
+                                            <input type="submit" id="sellerSubmit" style="display: none">
+                                            <button class="bid-review-button btn-secondary btn" onclick="watchSellerInfo(this.form)">판매자정보</button>
+                                        </form>
+                                        <div class="bid-seller-modal-button btn-secondary btn" style="display: none" data-bs-toggle="modal" data-bs-target="#SellerInfoModal">판매자 정보보기</div>
                                         <%
                                         } else {
                                         %>
@@ -292,13 +298,7 @@
                                                 System.out.println(rs2.getString(14));
                                                 //data-item="rs2.getInt(1)"
                                         %>
-                                        <form action="bid.jsp" method="post">
-                                            <input type="hidden" class="watchSeller" name="watchSeller">
-                                            <input type="hidden" class="seller_id" name="seller_id" value="<%=rs2.getString(14)%>">
-                                            <input type="submit" id="sellerSubmit" style="display: none">
-                                            <button class="bid-review-button btn-secondary btn" onclick="watchSellerInfo(this.form)">판매자정보</button>
-                                        </form>
-                                        <div class="bid-seller-modal-button btn-secondary btn" style="display: none" data-bs-toggle="modal" data-bs-target="#SellerInfoModal">판매자 정보보기</div>
+                                        <div class="bid-review-button btn-secondary btn" data-item="<%=rs2.getString(14)%>,<%=rs2.getInt(1)%>" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                         <%
                                         } else {
                                         %>
