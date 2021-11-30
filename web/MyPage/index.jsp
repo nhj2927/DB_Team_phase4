@@ -182,8 +182,8 @@
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ?) a where a.num BETWEEN 1 and 3 \n" +
-                                    "ORDER BY a.create_date DESC";
+                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ? ORDER BY b.create_date DESC) a where a.num BETWEEN 1 and 3 \n";
+
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
                             try {
@@ -396,12 +396,13 @@
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            sql = "select * \n" +
-                                    "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
-                                    "        from item it, address ad\n" +
-                                    "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
-                                    "where a.num BETWEEN 1 and 3 \n" +
-                                    "ORDER BY a.create_date DESC";
+                            sql = "select *  from" +
+                                    "(select rownum as num, x.*\n" +
+                                    "from (\n" +
+                                    "select it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
+                                    "from item it, address ad\n" +
+                                    "WHERE it.ad_id = ad.ad_id and it.u_id = ? ORDER BY it.create_date DESC) x )" +
+                                    "where num BETWEEN 1 and 3 \n";
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
                             try {
