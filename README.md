@@ -26,11 +26,11 @@
 
 ### 1) Github PULL
 - github에서 pull한 경우
-1. 링크를 통하여 JSP 프로젝트를 생성합니다.([링크](https://velog.io/@ruddms936/IntelliJ%EB%A1%9C-JSP-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1))
+1. 링크를 통하여 JSP 프로젝트를 생성합니다.([링크](https://velog.io/@ruddms936/IntelliJ%EB%A1%9C-JSP-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1))  
 프로젝트 이름은 DB_Team_phase4으로 합니다.
 2. File - Project Structure - Libraries에 ojdbc8과 tomcat lib에 있는 모든 jar파일들을 추가합니다.
 3. index.jsp 파일을 지웁니다.
-4. git pull 명령어를 통해 코드를 내려받습니다.
+4. git pull 명령어를 통해 코드를 내려받습니다.  
 git pull 오류시 git pull origin 브런치명 --allow-unrelated-histories를 실행합니다
 5. db_final.dump 파일을 통해 데이터베이스를 복원합니다.  
 데이터베이스 유저 이름과 비밀번호는 DBTeam7/comp322로 해야합니다.  
