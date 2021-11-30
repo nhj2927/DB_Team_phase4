@@ -72,37 +72,37 @@
         if (rs.next()) { %>
     <div class="item-detail">
         <img class="item-image" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(9)%>"/>
-        <div class="item-info">
-            <h3><%=rs.getString(1)%>
-            </h3>
+        <div class="item-info fw-bolder">
+            <h2><%=rs.getString(1)%>
+            </h2>
             <hr class="mb-3">
             <div class="row mt-3 mb-4 h5">
-                <div class="col-md-4">시작가</div>
+                <div class="col-md-4 fw-bold">시작가</div>
                 <div class="col-md-8"><%=rs.getInt(2)%>원</div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">현재가</div>
+                <div class="col-md-4 fw-bold">현재가</div>
                 <div class="col-md-8 text-danger fw-bold"><%=rs.getInt(3)%>원</div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">즉시구매가</div>
+                <div class="col-md-4 fw-bold">즉시구매가</div>
                 <div class="col-md-8"><%=rs.getInt(4)%>원</div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">최소입찰단위</div>
+                <div class="col-md-4 fw-bold">최소입찰단위</div>
                 <div class="col-md-8"><%=rs.getInt(5)%>원</div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">입찰수</div>
+                <div class="col-md-4 fw-bold">입찰수</div>
                 <div class="col-md-8"><%=rs.getInt(6)%>회</div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">종료</div>
+                <div class="col-md-4 fw-bold">종료</div>
                 <div class="col-md-8"><%=rs.getDate(7)%>
                 </div>
             </div>
             <div class="row mb-4 h5">
-                <div class="col-md-4">판매자평점</div>
+                <div class="col-md-4 fw-bold">판매자평점</div>
                 <div class="col-md-8 row align-items-center">
                         <span class="col-md-1">
                             <img src="../Public/image/star.png"
@@ -126,6 +126,7 @@
             </div>
         </div>
     </div>
+    <hr/>
     <div class="item-description mb-5">
         <div class="h3 fw-bold mb-3 text-primary">상세 정보</div>
         <div class="h5" style="line-height: 2"><%=rs.getString(8).replaceAll("\n", "<br>")%>
