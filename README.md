@@ -47,7 +47,7 @@
 1. zip 파일 해제 후 intellij로 폴더 열기
 2. 최상단 DB_Team_phase4 폴더에서 우클릭 후 Add Frameworks Support
     
-    ![Untitled](https://www.notion.so/taewon98/Read-Me-phase4-team7-232c292605c24ebd8803cfabe33bb99a#cb103abb2c094248b9852aef59b3ec26)
+    ![image](https://user-images.githubusercontent.com/33050476/144109065-4651a883-92fe-4d1a-9198-37f60a602892.png)
     
     - 위와 같이 설정 후 OK
 3. 상단 add configuration에서
