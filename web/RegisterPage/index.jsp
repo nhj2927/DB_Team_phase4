@@ -142,6 +142,13 @@
             rs.close();
         }
         %>
+        <div style="display: flex;flex-direction:row; justify-content: center; margin-top:50px">
+            <div class="header-logo">
+                <a href="/DB_Team_phase4_war_exploded/" class="logo">
+                    <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_black.png" alt="" style="width: 400px;">
+                </a>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="border form-wrapper">
                 <form class="form-register" action="./" method="post">
