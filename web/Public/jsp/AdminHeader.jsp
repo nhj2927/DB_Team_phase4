@@ -29,7 +29,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="index.jsp" class="logo">
-                            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+                            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="width: 200px;">
                         </a>
                     </div>
                 </div>
