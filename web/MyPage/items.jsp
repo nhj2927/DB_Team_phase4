@@ -61,8 +61,8 @@
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
 <div class="MyPageBox">
   <div class="MyPageTopBar">
-    <div class="MyPageTopBar_Logo">
-      <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+    <div class="MyPageTopBar_Logo" onclick="location.href='index.jsp'">
+      <div style="text-align: center; font-size: 1.8rem;font-weight: bold;color:white;margin-top:1.3rem">MY HIAuction</div>
     </div>
     <%
       try {
@@ -199,7 +199,7 @@
                               <div class="card-address"><%=rs.getString(11)%>></div>
                               <div class="buttons row-flex spb">
                                 <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간변경</div>
                               </div>
                             </div>
                           </div>

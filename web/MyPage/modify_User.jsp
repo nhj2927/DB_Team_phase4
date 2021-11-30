@@ -153,9 +153,9 @@
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
 <div class="MyPageBox">
     <div class="MyPageTopBar">
-        <div class="MyPageTopBar_Logo">
-            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
-        </div>
+        <a class="MyPageTopBar_Logo" href='index.jsp'>
+            <div style="text-align: center; font-size: 1.8rem;font-weight: bold;color:white;margin-top:1.3rem">MY HIAuction</div>
+        </a>
         <%
             try {
                 Context context = new InitialContext();
