@@ -77,7 +77,14 @@
         Context context = new InitialContext();
         DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
         conn = dataSource.getConnection();
-        String sql = "SELECT COUNT(*) FROM Item"
+
+        String sql = "UPDATE Item SET is_end = '2'"
+                    + " WHERE expire_date < SYSDATE";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.executeUpdate();
+        pstmt.close();
+
+        sql = "SELECT COUNT(*) FROM Item"
                 + " WHERE c_id = ?"
                 + " AND ad_id = (SELECT ad_id FROM Address"
                 + " WHERE name = ?)"
