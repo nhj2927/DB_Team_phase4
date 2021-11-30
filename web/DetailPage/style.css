@@ -1,0 +1,51 @@
+.container .item-detail {
+    display: flex;
+    align-items: center;
+    margin: 4rem 0;
+    width: 100%;
+}
+
+.container .item-detail .item-image {
+    width: 30rem;
+    height: 20rem;
+    margin-right: 5rem;
+}
+
+.container .item-detail .item-info {
+    flex: 1;
+}
+.container .item-detail .btn-wrapper {
+    margin-left: 0;
+}
+.container .item-detail .btn-wrapper .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1.3rem;
+    cursor: pointer;
+    border-radius: 10px;
+    max-width: 25%;
+    height: 2.5rem;
+    transition: 0.2s;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+.container .item-detail .btn-wrapper .button.bid {
+    background: #65B67E;
+}
+.container .item-detail .btn-wrapper .button.quick {
+    background: #FAAA33;
+}
+.container .item-detail .btn-wrapper .button.report {
+    background: #DD6C58;
+}
+.container .item-detail .btn-wrapper .button.bid:hover,
+.button.quick:hover, .button.report:hover {
+    filter: brightness(0.9);
+}
+#bid-price-input {
+    display: inline;
+    margin: 1rem 0.3rem 1rem 0;
+    width: 40%;
+}
