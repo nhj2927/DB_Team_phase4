@@ -105,15 +105,15 @@
         {
             e.printStackTrace();
         } finally {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
+            if (conn != null) {
+                conn.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
         }
     }
 
@@ -197,6 +197,16 @@
                 ratingCount = rs.getInt(1);
             } catch (SQLException e){
                 e.printStackTrace();
+            } finally {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             }
         %>
         <div class="MyPageTopBar_info">
@@ -300,6 +310,14 @@
                                 <td>
                                     <div>
                                         <%
+                                            try {
+                                                Context context = new InitialContext();
+                                                DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle");
+                                                conn = dataSource.getConnection();
+                                            } catch (SQLException e){
+                                                e.printStackTrace();
+                                            }
+
                                             sql = "select name from lives_in l, address a where l.ad_id = a.ad_id and l.u_id = ?";
                                             try{
                                                 pstmt = conn.prepareStatement(sql);
@@ -311,6 +329,16 @@
                                                 }
                                             } catch(SQLException e) {
                                                 e.printStackTrace();
+                                            } finally {
+                                                if (conn != null) {
+                                                    conn.close();
+                                                }
+                                                if (pstmt != null) {
+                                                    pstmt.close();
+                                                }
+                                                if (rs != null) {
+                                                    rs.close();
+                                                }
                                             }
                                         %>
                                     </div>

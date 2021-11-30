@@ -182,7 +182,7 @@
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ? ORDER BY b.create_date DESC) a where a.num BETWEEN 1 and 3 \n";
+                            sql = "select * from(select rownum as num, a.* from (select b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ? ORDER BY b.create_date DESC) a) where num BETWEEN 1 and 3 \n";
 
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
