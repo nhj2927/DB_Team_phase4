@@ -10,6 +10,7 @@
     request.setCharacterEncoding("utf-8");
     String address = request.getParameter("address");
     String category_id = request.getParameter("category_id");
+    String name = (String) session.getAttribute("name");
 %>
 <style>
     .search-btn {
@@ -71,24 +72,9 @@
                         </form>
                     </div>
                 </div>
-                <!-- /SEARCH BAR -->
-
-<%--                <!-- ACCOUNT -->--%>
-<%--                <div class="col-md-3 clearfix">--%>
-<%--                    <div class="header-ctn">--%>
-<%--                        --%>
-
-<%--                        <!-- Menu Toogle -->--%>
-<%--                        <div class="menu-toggle">--%>
-<%--                            <a href="#">--%>
-<%--                                <i class="fa fa-bars"></i>--%>
-<%--                                <span>Menu</span>--%>
-<%--                            </a>--%>
-<%--                        </div>--%>
-<%--                        <!-- /Menu Toogle -->--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-                <!-- /ACCOUNT -->
+                <div class="col-md-3 row justify-content-end" style="font-size: 1.5rem; color: #fff; margin-top: 1rem">
+                    안녕하세요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=name%>님
+                </div>
             </div>
             <!-- row -->
         </div>
@@ -103,7 +89,7 @@
             e.preventDefault();
             searchItem();
         }
-    })
+    });
     const searchItem = () => {
         const address = '<%=address%>';
         const category_id = '<%=category_id%>';
