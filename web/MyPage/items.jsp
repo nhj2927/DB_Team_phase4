@@ -195,8 +195,8 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="buttons row-flex spb">
                                 <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
                                 <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간변경</div>
@@ -218,8 +218,8 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="buttons row-flex spb">
                                 <form action="items.jsp" method="post">
                                   <input type="hidden" class="watchBuyer" name="watchBuyer">
@@ -274,8 +274,8 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="bid-review-button btn-secondary btn" onclick="location.href='../DetailPage/index.jsp?item_id=<%=rs.getInt(2)%>'">상세보기</div>
                             </div>
                           </div>
