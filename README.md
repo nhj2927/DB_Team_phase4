@@ -52,8 +52,8 @@
     - 위와 같이 설정 후 OK
 3. 상단 add configuration에서
 
-![Untitled](Read%20Me%20-%20phase4(team7)%20cb103abb2c094248b9852aef59b3ec26/Untitled%201.png)
+    ![image](https://user-images.githubusercontent.com/33050476/144109210-5a0db5b8-7d0a-4652-ad6d-a4600228ff26.png)
 
 이후 Deployment에서 Artifact 추가
 
-![Untitled](Read%20Me%20-%20phase4(team7)%20cb103abb2c094248b9852aef59b3ec26/Untitled%202.png)
+    ![Untitled](Read%20Me%20-%20phase4(team7)%20cb103abb2c094248b9852aef59b3ec26/Untitled%202.png)
