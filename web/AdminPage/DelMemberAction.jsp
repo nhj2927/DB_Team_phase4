@@ -35,7 +35,7 @@
             "    select * " +
             "    from bid " +
             "    where bid.it_id = tmp.itid " +
-            "    and bid.u_id !=?)";
+            "    and (bid.u_id !=? or bid.u_id is not null)";
     PreparedStatement pstmt1=conn.prepareStatement(sql);
     pstmt1.setString(1,memberID);
     pstmt1.setString(2,memberID);
