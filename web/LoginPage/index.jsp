@@ -108,7 +108,15 @@
     }
 }
 } else { %>
+<div style="display: flex;flex-direction:row; justify-content: center; margin-top:50px">
+    <div class="header-logo">
+        <a href="/DB_Team_phase4_war_exploded/" class="logo">
+            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_black.png" alt="" style="width: 400px;">
+        </a>
+    </div>
+</div>
 <div class="container">
+
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
         <p id="profile-name" class="profile-name-card"></p>
