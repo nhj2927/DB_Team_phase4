@@ -58,7 +58,7 @@
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <title>HiAuction - 마이페이지</title>
     <link type="text/css" rel="stylesheet" href="../Public/css/MyPage_Main.css">
-    <lint type="text/css" rel="stylesheet" href="./review.css"/>
+    <link type="text/css" rel="stylesheet" href="./review.css"/>
 </head>
 <body>
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
