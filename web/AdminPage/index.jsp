@@ -51,7 +51,7 @@
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th>리포트ID</th>
+                            <th>RID</th>
                             <th>신고된 아이템명</th>
                             <th>신고자ID</th>
                             <th>담당자</th>
@@ -79,9 +79,9 @@
                                 <td><%=rs.getString(5)%></td>
                                 <td>
                                     <%
-                                        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+                                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                         Date date = df.parse(rs.getString(6));
-                                        df = new SimpleDateFormat("yyyy-mm-dd");
+                                        df = new SimpleDateFormat("yyyy-MM-dd");
                                         out.print(df.format(date));
                                     %>
                                 </td>
