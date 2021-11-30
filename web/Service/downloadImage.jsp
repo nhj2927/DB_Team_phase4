@@ -31,6 +31,8 @@
                 is = rs.getBinaryStream(1);
             }
             response.setContentType("text/html");
+            out.clear();
+            pageContext.pushBody();
             os = response.getOutputStream();
 
             int num;

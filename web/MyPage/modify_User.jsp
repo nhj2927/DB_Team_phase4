@@ -296,13 +296,28 @@
                             </tr>
 
                             <tr>
-                                <td>거래지역 변경</td>
+                                <td>거래지역</td>
                                 <td>
-                                    <div>대현동 | 복현동 | 산격동</div>
+                                    <div>
+                                        <%
+                                            sql = "select name from lives_in l, address a where l.ad_id = a.ad_id and l.u_id = ?";
+                                            try{
+                                                pstmt = conn.prepareStatement(sql);
+                                                pstmt.setString(1, (String)session.getAttribute("id"));
+                                                rs = pstmt.executeQuery();
+                                                while(rs.next()) {
+                                                    out.print(rs.getString(1));
+                                                    out.print(" | ");
+                                                }
+                                            } catch(SQLException e) {
+                                                e.printStackTrace();
+                                            }
+                                        %>
+                                    </div>
                                     <br>
                                     <div>
-                                        <button type="button"  class="btn btn-warning" onclick="">지역 추가</button>
-                                        <button type="button"  class="btn btn-secondary" onclick="">지역 삭제</button>
+                                        <!--<button type="button"  class="btn btn-warning" onclick="">지역 추가</button>
+                                        <button type="button"  class="btn btn-secondary" onclick="">지역 삭제</button>-->
                                     </div>
                                 </td>
                             </tr>

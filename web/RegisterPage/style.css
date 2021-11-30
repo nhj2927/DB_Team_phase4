@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 100px 0;
-    height: 100vh;
+    margin: 20px 0;
+    height: 90vh;
 }
 .form-wrapper{
     width: 600px;
