@@ -32,8 +32,8 @@
 3. index.jsp 파일을 지웁니다.
 4. git pull 명령어를 통해 코드를 내려받습니다.
 git pull 오류시 git pull origin 브런치명 --allow-unrelated-histories를 실행합니다
-5. db_final.dump 파일을 통해 데이터베이스를 복원합니다.
-데이터베이스 유저 이름과 비밀번호는 DBTeam7/comp322로 해야합니다.
+5. db_final.dump 파일을 통해 데이터베이스를 복원합니다.  
+데이터베이스 유저 이름과 비밀번호는 DBTeam7/comp322로 해야합니다.  
 복원 명령어 - imp userid=DBTeam7/comp322 FILE="db_final.dump파일 경로"
 6. 서버를 실행시킵니다.
 
