@@ -2,8 +2,6 @@
 
 ## 0. 프로젝트 및 팀원 소개
 
----
-
 ### 1) 프로젝트
 
 - HiAuction : **지역기반** 중고 물품 경매 서비스
@@ -17,7 +15,6 @@
 
 ## 1. 실행환경
 
----
 
 - OS : window10 x64
 - IDE : IntelliJ IDEA 2021.2.3 (Ultimate Edition)
@@ -28,8 +25,6 @@
 ## 2. 실행방법
 
 ### 1) Github PULL
-
----
 
 1. 링크를 통하여 JSP 프로젝트를 생성합니다.([링크](https://velog.io/@ruddms936/IntelliJ%EB%A1%9C-JSP-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1))
 프로젝트 이름은 DB_Team_phase4으로 합니다.
@@ -42,7 +37,6 @@
 
 ### 2) ZIP 형식
 
----
 
 1. zip 파일 해제 후 intellij로 폴더 열기
 2. 최상단 DB_Team_phase4 폴더에서 우클릭 후 Add Frameworks Support
