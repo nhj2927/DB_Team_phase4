@@ -58,14 +58,14 @@
     <link type="text/css" rel="stylesheet" href="../Public/css/style.css"/>
     <title>HiAuction - 마이페이지</title>
     <link type="text/css" rel="stylesheet" href="../Public/css/MyPage_Main.css">
-    <lint type="text/css" rel="stylesheet" href="./review.css"/>
+    <link type="text/css" rel="stylesheet" href="./review.css"/>
 </head>
 <body>
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
 <div class="MyPageBox">
     <div class="MyPageTopBar">
-        <div class="MyPageTopBar_Logo">
-            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+        <div class="MyPageTopBar_Logo" onclick="location.href='index.jsp'">
+            <div style="text-align: center; font-size: 1.8rem;font-weight: bold;color:white;margin-top:1.3rem">MY HIAuction</div>
         </div>
         <%
             try {
@@ -182,8 +182,8 @@
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ?) a where a.num BETWEEN 1 and 3 \n" +
-                                    "ORDER BY a.create_date DESC";
+                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ? ORDER BY b.create_date DESC) a where a.num BETWEEN 1 and 3 \n";
+
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
                             try {
@@ -229,7 +229,13 @@
                                         <%
                                             if (rs.getInt(3) == rs2.getInt(7)) {
                                         %>
-                                        <div class="bid-review-button btn-secondary btn" data-bs-toggle="modal" data-bs-target="#reviewModal">판매자와 연락하기</div>
+                                        <form action="bid.jsp" method="post">
+                                            <input type="hidden" class="watchSeller" name="watchSeller">
+                                            <input type="hidden" class="seller_id" name="seller_id" value="<%=rs2.getString(14)%>">
+                                            <input type="submit" id="sellerSubmit" style="display: none">
+                                            <button class="bid-review-button btn-secondary btn" onclick="watchSellerInfo(this.form)">판매자정보</button>
+                                        </form>
+                                        <div class="bid-seller-modal-button btn-secondary btn" style="display: none" data-bs-toggle="modal" data-bs-target="#SellerInfoModal">판매자 정보보기</div>
                                         <%
                                         } else {
                                         %>
@@ -244,12 +250,12 @@
                                 <%
                                     if (rs.getInt(3) == rs2.getInt(7)) {
                                 %>
-                                <div class="item-alarm-finish alarm ">낙찰완료</div>
+                                <div class="item-alarm-bidFinish alarm ">낙찰완료</div>
                                 <div class="price"><%=rs2.getInt(7)%>원</div>
                                 <%
                                 } else {
                                 %>
-                                <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                 <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                 <%
                                     }
@@ -292,13 +298,7 @@
                                                 System.out.println(rs2.getString(14));
                                                 //data-item="rs2.getInt(1)"
                                         %>
-                                        <form action="bid.jsp" method="post">
-                                            <input type="hidden" class="watchSeller" name="watchSeller">
-                                            <input type="hidden" class="seller_id" name="seller_id" value="<%=rs2.getString(14)%>">
-                                            <input type="submit" id="sellerSubmit" style="display: none">
-                                            <button class="bid-review-button btn-secondary btn" onclick="watchSellerInfo(this.form)">판매자정보</button>
-                                        </form>
-                                        <div class="bid-seller-modal-button btn-secondary btn" style="display: none" data-bs-toggle="modal" data-bs-target="#SellerInfoModal">판매자 정보보기</div>
+                                        <div class="bid-review-button btn-secondary btn" data-item="<%=rs2.getString(14)%>,<%=rs2.getInt(1)%>" data-bs-toggle="modal" data-bs-target="#reviewModal">후기 작성하기</div>
                                         <%
                                         } else {
                                         %>
@@ -318,7 +318,7 @@
                                 <%
                                 } else {
                                 %>
-                                <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                 <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                 <%
                                     }
@@ -349,7 +349,7 @@
                                 <%
                                 } else {
                                 %>
-                                <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                 <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                 <%
                                     }
@@ -396,12 +396,13 @@
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            sql = "select * \n" +
-                                    "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
-                                    "        from item it, address ad\n" +
-                                    "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
-                                    "where a.num BETWEEN 1 and 3 \n" +
-                                    "ORDER BY a.create_date DESC";
+                            sql = "select *  from" +
+                                    "(select rownum as num, x.*\n" +
+                                    "from (\n" +
+                                    "select it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
+                                    "from item it, address ad\n" +
+                                    "WHERE it.ad_id = ad.ad_id and it.u_id = ? ORDER BY it.create_date DESC) x )" +
+                                    "where num BETWEEN 1 and 3 \n";
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
                             try {
@@ -415,11 +416,11 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs.getString(3)%>></div>
-                                        <div class="card-address"><%=rs.getString(11)%>></div>
+                                        <div class="card-title"><%=rs.getString(3)%></div>
+                                        <div class="card-address"><%=rs.getString(11)%></div>
                                         <div class="buttons row-flex spb">
                                             <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                                            <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                                            <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간변경</div>
                                         </div>
                                     </div>
                                 </div>
@@ -438,8 +439,8 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs.getString(3)%>></div>
-                                        <div class="card-address"><%=rs.getString(11)%>></div>
+                                        <div class="card-title"><%=rs.getString(3)%></div>
+                                        <div class="card-address"><%=rs.getString(11)%></div>
                                         <div class="buttons row-flex spb">
                                             <form action="items.jsp" method="post">
                                                 <input type="hidden" class="watchBuyer" name="watchBuyer">
@@ -458,7 +459,7 @@
                                 </div>
                             </div>
                             <div class="bid-right col-flex spb">
-                                <div class="item-alarm-onSale alarm ">낙찰완료</div>
+                                <div class="item-alarm-bidFinish alarm ">낙찰완료</div>
                                 <div class="price">낙찰가격: <%=rs.getInt(5)%>원</div>
                             </div>
                         </div>
@@ -494,8 +495,8 @@
                                 <div class="bid-content row-flex">
                                     <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                                     <div class="bid-body col-flex">
-                                        <div class="card-title"><%=rs.getString(3)%>></div>
-                                        <div class="card-address"><%=rs.getString(11)%>></div>
+                                        <div class="card-title"><%=rs.getString(3)%></div>
+                                        <div class="card-address"><%=rs.getString(11)%></div>
                                         <div class="bid-review-button btn-secondary btn" onclick="location.href='../DetailPage/index.jsp?item_id=<%=rs.getInt(2)%>'">상세보기</div>
                                     </div>
                                 </div>
@@ -706,11 +707,11 @@
     let Item_U_id = -1;
     let Item_id = -1;
     $('#reviewModal').on('show.bs.modal', function (e) {
-        alert("show");
+        //alert("show");
         Item_U_id = $(e.relatedTarget).data('item').split(",");
-        alert(Item_U_id[0]);
+        //alert(Item_U_id[0]);
         //Item_U_id = $(e.relatedTarget).data('itemUid');
-        alert(Item_U_id[1]);
+        //alert(Item_U_id[1]);
         //alert(Item_U_id);
     });
     function reviewEnroll(form){
@@ -728,7 +729,7 @@
     });
     $('#ExpandDateModal').on('show.bs.modal', function (e) {
         Item_id = $(e.relatedTarget).data('item');
-        alert(Item_id);
+        //alert(Item_id);
     });
     function deleteItem(form){
         $('.it_id').val(Item_id);

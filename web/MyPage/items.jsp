@@ -61,8 +61,8 @@
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
 <div class="MyPageBox">
   <div class="MyPageTopBar">
-    <div class="MyPageTopBar_Logo">
-      <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+    <div class="MyPageTopBar_Logo" onclick="location.href='index.jsp'">
+      <div style="text-align: center; font-size: 1.8rem;font-weight: bold;color:white;margin-top:1.3rem">MY HIAuction</div>
     </div>
     <%
       try {
@@ -179,9 +179,8 @@
               sql = "select * \n" +
                       "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
                       "        from item it, address ad\n" +
-                      "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
+                      "        WHERE it.ad_id = ad.ad_id and it.u_id = ? ORDER BY it.create_date DESC) a \n";
 //                      "where a.num BETWEEN 1 and 3 \n" +
-                      "ORDER BY a.create_date DESC";
               pstmt = conn.prepareStatement(sql);
               pstmt.setString(1, id);
               try {
@@ -195,11 +194,11 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="buttons row-flex spb">
                                 <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#deleteItemModal">삭제하기</div>
-                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간연장</div>
+                                <div class="bid-review-button btn-secondary btn" data-item="<%=rs.getInt(2)%>" data-bs-toggle="modal" data-bs-target="#ExpandDateModal">기간변경</div>
                               </div>
                             </div>
                           </div>
@@ -218,8 +217,8 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="buttons row-flex spb">
                                 <form action="items.jsp" method="post">
                                   <input type="hidden" class="watchBuyer" name="watchBuyer">
@@ -238,7 +237,7 @@
                           </div>
                         </div>
                         <div class="bid-right col-flex spb">
-                          <div class="item-alarm-onSale alarm ">낙찰완료</div>
+                          <div class="item-alarm-bidFinish alarm ">낙찰완료</div>
                           <div class="price">낙찰가격: <%=rs.getInt(5)%>원</div>
                         </div>
                       </div>
@@ -274,8 +273,8 @@
                           <div class="bid-content row-flex">
                             <img class="card-img" height="100px" width="100px" src="../Service/downloadImage.jsp?it_id=<%=rs.getInt(2)%>">
                             <div class="bid-body col-flex">
-                              <div class="card-title"><%=rs.getString(3)%>></div>
-                              <div class="card-address"><%=rs.getString(11)%>></div>
+                              <div class="card-title"><%=rs.getString(3)%></div>
+                              <div class="card-address"><%=rs.getString(11)%></div>
                               <div class="bid-review-button btn-secondary btn" onclick="location.href='../DetailPage/index.jsp?item_id=<%=rs.getInt(2)%>'">상세보기</div>
                             </div>
                           </div>
@@ -392,7 +391,7 @@
   });
   $('#ExpandDateModal').on('show.bs.modal', function (e) {
     Item_id = $(e.relatedTarget).data('item');
-    alert(Item_id);
+    //alert(Item_id);
   });
   function deleteItem(form){
     $('.it_id').val(Item_id);
@@ -442,7 +441,7 @@
   const name = "<%=rs.getString(1)%>";
   const phone = "<%=rs.getString(2)%>";
   const email = "<%=rs.getString(3)%>";
-  alert(name, phone, email);
+  //alert(name, phone, email);
 </script>
 <script>
   document.getElementById('BuyerInfoModalName').innerHTML = name;

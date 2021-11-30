@@ -63,8 +63,8 @@
 <jsp:include page="../Public/jsp/Header.jsp"></jsp:include>
 <div class="MyPageBox">
     <div class="MyPageTopBar">
-        <div class="MyPageTopBar_Logo">
-            <img src="/DB_Team_phase4_war_exploded/Public/image/HiAuction-logos_white.png" alt="" style="height: 100px;width: 300px;object-fit: cover;">
+        <div class="MyPageTopBar_Logo" onclick="location.href='index.jsp'">
+            <div style="text-align: center; font-size: 1.8rem;font-weight: bold;color:white;margin-top:1.3rem">MY HIAuction</div>
         </div>
         <%
             try {
@@ -178,9 +178,8 @@
                             } catch (SQLException e){
                                 e.printStackTrace();
                             }
-                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ?) a " +
+                            sql = "select * from (select rownum as num, b_id, price, create_date, u_id, it_id from bid b WHERE b.u_id = ? ORDER BY b.create_date DESC) a ";
 //                                    "where a.num BETWEEN 1 and 3 \n"
-                                    "ORDER BY a.create_date DESC";
                             pstmt = conn.prepareStatement(sql);
                             pstmt.setString(1, id);
                             try {
@@ -247,12 +246,12 @@
                                                     <%
                                                         if (rs.getInt(3) == rs2.getInt(7)) {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰완료</div>
+                                                    <div class="item-alarm-bidFinish alarm ">낙찰완료</div>
                                                     <div class="price"><%=rs2.getInt(7)%>원</div>
                                                     <%
                                                     } else {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                    <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                                     <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                     <%
                                                         }
@@ -315,7 +314,7 @@
                                                             <%
                                                         } else {
                                                             %>
-                                                                <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                                <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                                                 <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                             <%
                                                         }
@@ -346,7 +345,7 @@
                                                     <%
                                                     } else {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                    <div class="item-alarm-bidFail alarm ">낙찰실패</div>
                                                     <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                     <%
                                                         }
@@ -593,7 +592,7 @@
     const name = "<%=rs.getString(1)%>";
     const phone = "<%=rs.getString(2)%>";
     const email = "<%=rs.getString(3)%>";
-    alert(name, phone, email);
+    //alert(name, phone, email);
 </script>
 <script>
     document.getElementById('BuyerInfoModalName').innerHTML = name;
