@@ -593,7 +593,7 @@
     const name = "<%=rs.getString(1)%>";
     const phone = "<%=rs.getString(2)%>";
     const email = "<%=rs.getString(3)%>";
-    alert(name, phone, email);
+    //alert(name, phone, email);
 </script>
 <script>
     document.getElementById('BuyerInfoModalName').innerHTML = name;

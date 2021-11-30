@@ -392,7 +392,7 @@
   });
   $('#ExpandDateModal').on('show.bs.modal', function (e) {
     Item_id = $(e.relatedTarget).data('item');
-    alert(Item_id);
+    //alert(Item_id);
   });
   function deleteItem(form){
     $('.it_id').val(Item_id);
@@ -442,7 +442,7 @@
   const name = "<%=rs.getString(1)%>";
   const phone = "<%=rs.getString(2)%>";
   const email = "<%=rs.getString(3)%>";
-  alert(name, phone, email);
+  //alert(name, phone, email);
 </script>
 <script>
   document.getElementById('BuyerInfoModalName').innerHTML = name;
