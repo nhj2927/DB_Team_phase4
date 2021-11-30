@@ -37,7 +37,7 @@
             pstmt.close();
             rs.close();
 
-            sql = "INSERT INTO Report VALUES(seq_report.nextval, ?, ?, ?, ?)";
+            sql = "INSERT INTO Report VALUES(seq_report.nextval, ?, ?, ?, ?, SYSDATE)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, content);
             pstmt.setString(2, id);

@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="이름" name="AdminName" maxlength="20">
                                 </div>
-                                <input type="submit" class="btn btn-primary form-control" value="회원가입">
+                                <input type="submit" class="btn btn-primary form-control" value="관리자 추가">
                             </form>
                         </div>
                     </div>
