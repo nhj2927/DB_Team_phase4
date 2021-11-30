@@ -179,9 +179,8 @@
               sql = "select * \n" +
                       "from (select rownum as num, it.it_id, it.name, it.create_date, it.current_price, it.is_end, it.expire_date, it.img, it.u_id, it.ad_id, ad.name as ad_name\n" +
                       "        from item it, address ad\n" +
-                      "        WHERE it.ad_id = ad.ad_id and it.u_id = ?) a \n" +
+                      "        WHERE it.ad_id = ad.ad_id and it.u_id = ? ORDER BY it.create_date DESC) a \n";
 //                      "where a.num BETWEEN 1 and 3 \n" +
-                      "ORDER BY a.create_date DESC";
               pstmt = conn.prepareStatement(sql);
               pstmt.setString(1, id);
               try {
