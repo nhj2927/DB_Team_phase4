@@ -247,12 +247,12 @@
                                                     <%
                                                         if (rs.getInt(3) == rs2.getInt(7)) {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰완료</div>
+                                                    <div class="item-alarm-bidfinish alarm ">낙찰완료</div>
                                                     <div class="price"><%=rs2.getInt(7)%>원</div>
                                                     <%
                                                     } else {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                    <div class="item-alarm-bidfail alarm ">낙찰실패</div>
                                                     <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                     <%
                                                         }
@@ -315,7 +315,7 @@
                                                             <%
                                                         } else {
                                                             %>
-                                                                <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                                <div class="item-alarm-bidfail alarm ">낙찰실패</div>
                                                                 <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                             <%
                                                         }
@@ -346,7 +346,7 @@
                                                     <%
                                                     } else {
                                                     %>
-                                                    <div class="item-alarm-finish alarm ">낙찰실패</div>
+                                                    <div class="item-alarm-bidfail alarm ">낙찰실패</div>
                                                     <div class="price">입찰가격 : <%=rs.getInt(3)%>원</div>
                                                     <%
                                                         }

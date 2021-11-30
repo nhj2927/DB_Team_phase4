@@ -320,7 +320,8 @@
                             <tr>
                                 <td colspan="2" class="text-center">
                                     <input type="hidden" name="id" value="">
-                                    <button type="button"  class="btn btn-danger" onclick="">나가기</button>
+                                    <button type="button"  class="btn btn-secondary" onclick="">나가기</button>
+                                    <button type="submit"  class="btn btn-danger" data-item='<%=session.getAttribute("id")%>' data-bs-toggle="modal" data-bs-target="#deleteMemberModal">회원탈퇴</button>
                                 </td>
                             </tr>
                         </table>
@@ -377,6 +378,27 @@
         </div>
     </div>
 </div>
+<!-- deleteMember Modal -->
+<div class="modal fade" id="deleteMemberModal" tabindex="-1" aria-labelledby="deleteMemberModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMemberModalLabel">회원 탈퇴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="withdrawal_member.jsp" method="post">
+                <div class="modal-body">
+                    정말 탈퇴하시겠습니까?
+                </div>
+                <input type="hidden" class="u_id" name="u_id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteMember(this.form)">탈퇴하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- description tel Modal -->
 <div class="modal fade" id="modifydescriptionModal" tabindex="-1" aria-labelledby="modifydescriptionModalLabel" aria-hidden="true">
@@ -403,17 +425,18 @@
 </body>
 <script>
     let validStatus = 0;
+    let u_id = -1;
     function validateEmail(email) {
         var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         return re.test(email);
-    }
+    };
     function modifyEmail(form) {
         $('.modifyType').val('email');
         $('#modifyEmailSubmit').submit();
-    }
+    };
     function modifyTel(form) {
         $('.modifyType').val('tel');
-    }
+    };
     function modifyPass(form) {
         if (form.pass1.value != "" & form.pass2.value != "" & form.pass3.value != "") {
             if (form.pass2.value != form.pass3.value) {
@@ -428,7 +451,7 @@
         } else {
             alert("값을 입력해주세요");
         }
-    }
+    };
     function modifyDes(form){
         if (form.FormControlTextarea.value != ""){
             $('.modifyType').val('description');
@@ -436,12 +459,19 @@
         }else{
             alert("글을 써주세요")
         }
-    }
+    };
 
     function isValidSubmit() {
         return validStatus;
-    }
-
+    };
+    $('#deleteMemberModal').on('show.bs.modal', function (e) {
+        u_id = $(e.relatedTarget).data('item');
+        //alert(Item_id);
+    });
+    function deleteMember(form){
+        $('.u_id').val(u_id);
+        form.submit();
+    };
 </script>
 </html>
 <% } %>
