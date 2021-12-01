@@ -1,5 +1,9 @@
 # DB_Team_phase4
 
+# DEMO 영상
+---
+[https://youtu.be/VgkZnqWeVsQ](https://youtu.be/VgkZnqWeVsQ)
+
 ## 0. 프로젝트 및 팀원 소개
 
 ### 1) 프로젝트
@@ -91,8 +95,4 @@
         ![Untitled 10](https://user-images.githubusercontent.com/33050476/144116713-0baf8f47-ea27-4f49-a35a-29e56295d10d.png)
         
 
-# 4. DEMO 영상
 
----
-
-[https://youtu.be/VgkZnqWeVsQ](https://youtu.be/VgkZnqWeVsQ)
